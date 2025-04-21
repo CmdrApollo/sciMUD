@@ -37,8 +37,7 @@ def service_connection(key, mask) -> None:
             if name in games:
                 current_game = games[name]
 
-                current_game.parse(text)
-                output = current_game.update()
+                output = current_game.parse(text)
             else:
                 output = "An error occured with the server."
             
