@@ -73,13 +73,6 @@ def service_connection(key, mask) -> None:
         except OSError:
             pass
 
-#old code, delete if we dont need it
-# user must pass in host and port through the terminal
-# when running the program (127.0.0.1, 65432) is what
-# i have been using
-#host, port = sys.argv[1], int(sys.argv[2])
-
-
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((host, port))
 sock.listen()
