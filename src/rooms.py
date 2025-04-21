@@ -1,10 +1,11 @@
 from typing import Any
 
 class Room:
-    def __init__(self, name: str, description: str, items: list[str], neighbors: dict[str, Any]) -> None:
+    def __init__(self, name: str, description: str, items: list[str], entities: list[str], neighbors: dict[str, Any]) -> None:
         self.name: str = name
         self.description: str = description
         self.items: list[str] = items
+        self.entities: list[str] = entities
         self.neighbors: dict[str, Any] = neighbors
     
     def describe(self) -> str:

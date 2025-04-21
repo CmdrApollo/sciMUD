@@ -7,7 +7,7 @@ from player import Player
 from commands import *
 
 nothing_message = "You do nothing."
-forbidden_words = ['to', 'on', 'a', 'an', 'the', 'for', 'towards', 'at']
+forbidden_words = ['to', 'on', 'a', 'an', 'the', 'for', 'towards', 'at', 'with']
 
 class GameState:
     def __init__(self) -> None:
@@ -21,7 +21,7 @@ class GameState:
             data = json.load(f)
 
             for room in data["rooms"]:
-                self.global_rooms.append(Room(room["name"], room["description"], room["items"], {
+                self.global_rooms.append(Room(room["name"], room["description"], room["items"], room["entities"], {
                     'north': room["north"],
                     'south': room["south"],
                     'east': room["east"],
@@ -72,6 +72,7 @@ class Game:
 
             'grab': GrabCommand(),
             'get': GrabCommand(),
+            'take': GrabCommand(),
             'g': GrabCommand(),
 
             'use': UseCommand(),
@@ -83,7 +84,7 @@ class Game:
         
         stripped_text = text.lower().strip()
 
-        stripped_text.replace('stab', 'use knife')
+        stripped_text = stripped_text.replace('stab', 'use knife')
 
         verb, *args = stripped_text.split(' ')
         args = list(filter(lambda x: x not in forbidden_words, args))

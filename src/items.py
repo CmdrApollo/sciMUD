@@ -24,7 +24,11 @@ class Knife(Item):
     
     def use(self, recipient: str, game) -> str:
         if self.try_use(recipient, game):
-            return f"You use the knife on the {recipient}."
+            if recipient in game.current_room.entities:
+                game.current_room.entities.remove(recipient)
+                return f"You use the knife on the {recipient}."
+            else:
+                return f"There is no {recipient} here."
         return self.fail_message
 
 def get_item_with_name(name: str) -> Item:
