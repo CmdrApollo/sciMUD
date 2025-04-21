@@ -98,3 +98,12 @@ class World:
                 return f"Incorrect number of arguments. Expected (at least) {len(self.command.arguments)}."
         else:
             return nothing_message
+    
+
+    '''
+    Takes a string as input and echoes it to the currently active room in the world. What if there are multiple active rooms?
+    This could become a problem later when we implement summoning and the players are in different rooms.
+    For now let's just pretend that doesn't happen.
+    '''
+    def room_message(self, message: str):
+        pass #write this later
