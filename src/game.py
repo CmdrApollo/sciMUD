@@ -75,7 +75,10 @@ class Game:
             'g': GrabCommand(),
 
             'use': UseCommand(),
-            'u': UseCommand()
+            'u': UseCommand(),
+
+            'look': LookCommand(),
+            'l': LookCommand()
         }
         
         stripped_text = text.lower().strip()
