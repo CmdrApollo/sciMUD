@@ -21,7 +21,7 @@ def accept_wrapper(sock):
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=data)
     
-    games.update({ addr: Game() })
+    games.update({ addr: World() })
 
 def service_connection(key, mask) -> None:
     sock = key.fileobj

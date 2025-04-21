@@ -41,9 +41,7 @@ class WorldState:
 
 class World:
     def __init__(self) -> None:
-        self.state: WorldState
-     = WorldState
-    ()
+        self.state: WorldState = WorldState()
         self.command: Command = None
     
     def prompt(self):
