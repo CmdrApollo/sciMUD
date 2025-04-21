@@ -4,7 +4,7 @@ import selectors
 import types
 
 from game import Game
-from config import host,port
+import config
 
 sel = selectors.DefaultSelector()
 
@@ -72,6 +72,9 @@ def service_connection(key, mask) -> None:
             data.outb = data.outb[sent:]
         except OSError:
             pass
+
+host = config.host
+port = config.port
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((host, port))
