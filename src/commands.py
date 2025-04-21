@@ -82,10 +82,10 @@ class LookCommand(Command):
     def process(self, state) -> str:
         recipient = ''
 
-        if len(self.arguments) > 1:
-            recipient = self.arguments[1]
+        if len(self.arguments) > 0:
+            recipient = self.arguments[0]
             item = get_item_with_name(recipient)
-            if item:
+            if item and (type(item) in state.player.inventory or recipient in state.current_room.items):
                 return item.description
             else:
                 return "You don't see that."
