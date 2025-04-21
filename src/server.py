@@ -3,7 +3,7 @@ import socket
 import selectors
 import types
 
-from game import Game
+from world import World
 import config
 
 sel = selectors.DefaultSelector()
