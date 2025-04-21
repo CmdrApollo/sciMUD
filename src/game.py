@@ -1,31 +1,42 @@
 from typing import Any
+import os
+import json
 
 nothing_message = "You do nothing."
 
 class Room:
-    def __init__(self, idx: int, description: str, neighbors: dict[str, Any]):
-        self.idx: int = idx
+    def __init__(self, name: str, description: str, neighbors: dict[str, Any]) -> None:
+        self.name: str = name
         self.description: str = description
         self.neighbors: dict[str, Any] = neighbors
 
 class GameState:
     def __init__(self) -> None:
-        self.global_rooms = [
-            Room(0, "You find yourself in a well-lit tavern. There are a few patrons sprinkled throughout the building. To the west you see a dingy store-room.", {
-                'north': None,
-                'south': None,
-                'east': None,
-                'west': 1
-            }),
-            Room(1, "You walk into the dingy room. You can barely see. To the east you see a well lit tavern.", {
-                    'north': None,
-                    'south': None,
-                    'east': 0,
-                    'west': None
-            })
-        ]
+        self.just_started = True
+
+        self.global_rooms = []
+
+        with open(os.path.join("data", "rooms.json")) as f:
+            data = json.load(f)
+
+            for room in data["rooms"]:
+                self.global_rooms.append(Room(room["name"], room["description"], {
+                    'north': room["north"],
+                    'south': room["south"],
+                    'east': room["east"],
+                    'west': room["west"]
+                }))
+            
+            f.close()
 
         self.current_room = self.global_rooms[0]
+    
+    def get_room(self, name: str) -> Room:
+        for r in self.global_rooms:
+            if r.name == name:
+                return r
+        
+        return None
 
 class Command:
     def __init__(self, number_arguments: int) -> None:
@@ -50,7 +61,7 @@ class MoveCommand(Command):
             return f"Invalid argument: '{self.arguments[0]}'"
         
         if state.current_room.neighbors[self.arguments[0]] != None:
-            state.current_room = state.global_rooms[state.current_room.neighbors[self.arguments[0]]]
+            state.current_room = state.get_room(state.current_room.neighbors[self.arguments[0]])
             return f"You move {self.arguments[0]}.\n{state.current_room.description}"
         else:
             return "There is no room in that direction."
@@ -60,6 +71,20 @@ class Game:
         self.state: GameState = GameState()
         self.command: Command = None
     
+    def prompt(self):
+        if self.state.just_started:
+            self.state.just_started = False
+
+            return "Welcome To:\n\n" \
+            "                        __  \n" \
+            "          |\\  /| |   | |  \\ \n" \
+            "    |   | | \\/ | |   | |   | \n" \
+            "|/\\ |   | |    | |   | |   | \n" \
+            "|   | /\\| |    | |   | |   | \n" \
+            "|   | \\/| |    | |___| |__/  \n" 
+        else:
+            return ""
+
     def parse(self, text: str) -> None:
         if not len(text):
             return nothing_message

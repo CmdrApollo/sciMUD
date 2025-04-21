@@ -17,7 +17,7 @@ def accept_wrapper(sock):
     conn.setblocking(False)
     
     data = types.SimpleNamespace(addr=addr, inb=b"", outb=b"")
-    events = selectors.EVENT_READ
+    events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=data)
     
     games.update({ addr: Game() })
@@ -54,6 +54,23 @@ def service_connection(key, mask) -> None:
             print(f"Closing connection to {data.addr}.")
             sel.unregister(sock)
             sock.close()
+
+    if mask & selectors.EVENT_WRITE:
+        try:
+            name = sock.getpeername()
+            
+            if name in games:
+                current_game = games[name]
+
+                output = current_game.prompt()
+            else:
+                output = "An error occured with the server."
+                
+            out_data = output.encode('utf-8')
+            sent = sock.send(out_data)
+            data.outb = data.outb[sent:]
+        except OSError:
+            pass
 
 # user must pass in host and port through the terminal
 # when running the program (127.0.0.1, 65432) is what
