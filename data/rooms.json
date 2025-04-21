@@ -3,6 +3,7 @@
         {
             "name": "tavern",
             "description": "You find yourself in a well-lit tavern. There are a few patrons sprinkled throughout the building. To the west you see a dingy store-room.",
+            "items": [],
             "north": null,
             "south": null,
             "east": null,
@@ -10,7 +11,8 @@
         },
         {
             "name": "dingy_room",
-            "description": "You walk into the dingy room. You can barely see. To the east you see a well lit tavern.",
+            "description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
+            "items": ["knife"],
             "north": null,
             "south": null,
             "east": "tavern",

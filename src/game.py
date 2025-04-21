@@ -2,17 +2,18 @@ from typing import Any
 import os
 import json
 
-nothing_message = "You do nothing."
+from rooms import Room
+from player import Player
+from commands import *
 
-class Room:
-    def __init__(self, name: str, description: str, neighbors: dict[str, Any]) -> None:
-        self.name: str = name
-        self.description: str = description
-        self.neighbors: dict[str, Any] = neighbors
+nothing_message = "You do nothing."
+forbidden_words = ['to', 'on', 'a', 'an', 'the', 'for', 'towards', 'at']
 
 class GameState:
     def __init__(self) -> None:
         self.just_started = True
+
+        self.player = Player()
 
         self.global_rooms = []
 
@@ -20,7 +21,7 @@ class GameState:
             data = json.load(f)
 
             for room in data["rooms"]:
-                self.global_rooms.append(Room(room["name"], room["description"], {
+                self.global_rooms.append(Room(room["name"], room["description"], room["items"], {
                     'north': room["north"],
                     'south': room["south"],
                     'east': room["east"],
@@ -38,34 +39,6 @@ class GameState:
         
         return None
 
-class Command:
-    def __init__(self, number_arguments: int) -> None:
-        self.arguments: list[str] = [''] * number_arguments
-    
-    def process(self, game: GameState):
-        pass
-
-class JumpCommand(Command):
-    def __init__(self) -> None:
-        super().__init__(0)
-    
-    def process(self, state: GameState):
-        return "You jump."
-
-class MoveCommand(Command):
-    def __init__(self) -> None:
-        super().__init__(1)
-    
-    def process(self, state: GameState):
-        if self.arguments[0] not in state.current_room.neighbors:
-            return f"Invalid argument: '{self.arguments[0]}'"
-        
-        if state.current_room.neighbors[self.arguments[0]] != None:
-            state.current_room = state.get_room(state.current_room.neighbors[self.arguments[0]])
-            return f"You move {self.arguments[0]}.\n{state.current_room.description}"
-        else:
-            return "There is no room in that direction."
-
 class Game:
     def __init__(self) -> None:
         self.state: GameState = GameState()
@@ -81,7 +54,8 @@ class Game:
             "    |   | | \\/ |  |   |  |   | \n" \
             "|/\\ |   | |    |  |   |  |   | \n" \
             "|   | /\\| |    |  |   |  |   | \n" \
-            "|   | \\/| |    |.  \\__|. |__/. \n" 
+            "|   | \\/| |    |.  \\__|. |__/. \n" \
+            f"\n{self.state.current_room.describe()}\n" 
         else:
             return ""
 
@@ -91,17 +65,32 @@ class Game:
         
         commands = {
             'jump': JumpCommand(),
-            'move': MoveCommand()
+
+            'move': MoveCommand(),
+            'go': MoveCommand(),
+            'm': MoveCommand(),
+
+            'grab': GrabCommand(),
+            'get': GrabCommand(),
+            'g': GrabCommand(),
+
+            'use': UseCommand(),
+            'u': UseCommand()
         }
         
-        verbs = text.lower().strip().split(' ')
+        stripped_text = text.lower().strip()
 
-        if verbs[0] in commands:
-            self.command = commands[verbs[0]]
-            if len(verbs[1:]) == len(self.command.arguments):
-                self.command.arguments = verbs[1:]
+        stripped_text.replace('stab', 'use knife')
+
+        verb, *args = stripped_text.split(' ')
+        args = list(filter(lambda x: x not in forbidden_words, args))
+
+        if verb in commands:
+            self.command = commands[verb]
+            if len(args) >= len(self.command.arguments):
+                self.command.arguments = args
                 return self.command.process(self.state)
             else:
-                return f"Incorrect number of arguments. Expected {len(self.command.arguments)}."
+                return f"Incorrect number of arguments. Expected (at least) {len(self.command.arguments)}."
         else:
             return nothing_message
