@@ -74,3 +74,20 @@ class UseCommand(Command):
             return item.use(recipient, state)
         
         return "You don't have that item."
+
+class LookCommand(Command):
+    def __init__(self):
+        super().__init__(0)
+    
+    def process(self, state) -> str:
+        recipient = ''
+
+        if len(self.arguments) > 1:
+            recipient = self.arguments[1]
+            item = get_item_with_name(recipient)
+            if item:
+                return item.description
+            else:
+                return "You don't see that."
+        else:
+            return state.current_room.describe()
