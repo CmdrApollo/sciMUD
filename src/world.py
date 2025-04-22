@@ -7,14 +7,9 @@ from player import Player
 from commands import *
 from colors import *
 
-nothing_message = colored("You do nothing.", yellow)
-forbidden_words = ['to', 'on', 'a', 'an', 'the', 'for', 'towards', 'at', 'with']
-
 class WorldState:
     def __init__(self) -> None:
         self.just_started = True
-
-        self.player = Player()
 
         self.global_rooms = []
 
@@ -30,8 +25,6 @@ class WorldState:
                 }))
             
             f.close()
-
-        self.current_room = self.global_rooms[0]
     
     def get_room(self, name: str) -> Room:
         for r in self.global_rooms:
@@ -44,62 +37,7 @@ class World:
     def __init__(self) -> None:
         self.state: WorldState = WorldState()
         self.command: Command = None
-    
-    def prompt(self):
-        if self.state.just_started:
-            self.state.just_started = False
-
-            return "Welcome To\n\n" \
-            "                          __  \n" \
-            "          |\\  /|  |   |  |  \\ \n" \
-            "    |   | | \\/ |  |   |  |   | \n" \
-            "|/\\ |   | |    |  |   |  |   | \n" \
-            "|   | /\\| |    |  |   |  |   | \n" \
-            "|   | \\/| |    |.  \\__|. |__/. \n" \
-            f"\n{self.state.current_room.describe()}\n" 
-        else:
-            return ""
-
-    def parse(self, text: str) -> None:
-        if not len(text):
-            return nothing_message
-        
-        commands = {
-            'jump': JumpCommand(),
-
-            'move': MoveCommand(),
-            'go': MoveCommand(),
-            'm': MoveCommand(),
-
-            'grab': GrabCommand(),
-            'get': GrabCommand(),
-            'take': GrabCommand(),
-            'g': GrabCommand(),
-
-            'use': UseCommand(),
-            'u': UseCommand(),
-
-            'look': LookCommand(),
-            'l': LookCommand()
-        }
-        
-        stripped_text = text.lower().strip()
-
-        stripped_text = stripped_text.replace('stab', 'use knife')
-
-        verb, *args = stripped_text.split(' ')
-        args = list(filter(lambda x: x not in forbidden_words, args))
-
-        if verb in commands:
-            self.command = commands[verb]
-            if len(args) >= len(self.command.arguments):
-                self.command.arguments = args
-                return self.command.process(self.state)
-            else:
-                return colored(f"Incorrect number of arguments. Expected (at least) {len(self.command.arguments)}.", red)
-        else:
-            return nothing_message
-    
+        self.players: dict[str, Player] = {}
 
     '''
     Takes a string as input and echoes it to the currently active room in the world. What if there are multiple active rooms?

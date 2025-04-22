@@ -4,11 +4,12 @@ import selectors
 import types
 
 from world import World
+from player import Player
 import config
 
 sel = selectors.DefaultSelector()
 
-games = {}
+world = World()
 
 def accept_wrapper(sock):
     conn, addr = sock.accept()
@@ -21,7 +22,7 @@ def accept_wrapper(sock):
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=data)
     
-    games.update({ addr: World() })
+    world.players.update({ addr: Player(world) })
 
 def service_connection(key, mask) -> None:
     sock = key.fileobj
@@ -35,10 +36,10 @@ def service_connection(key, mask) -> None:
             
             name = sock.getpeername()
             
-            if name in games:
-                current_game = games[name]
+            if name in world.players:
+                current_player = world.players[name]
 
-                output = current_game.parse(text)
+                output = current_player.parse(text)
             else:
                 output = "An error occured with the server."
             
@@ -47,7 +48,7 @@ def service_connection(key, mask) -> None:
             data.outb = data.outb[sent:]
         else:
             try:
-                games.pop(sock.getpeername())
+                world.players.pop(sock.getpeername())
             except KeyError:
                 # this shouldn't happen but whatever
                 pass
@@ -60,10 +61,10 @@ def service_connection(key, mask) -> None:
         try:
             name = sock.getpeername()
             
-            if name in games:
-                current_game = games[name]
+            if name in world.players:
+                current_player = world.players[name]
 
-                output = current_game.prompt()
+                output = current_player.prompt()
             else:
                 output = "An error occured with the server."
                 
