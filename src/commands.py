@@ -7,6 +7,24 @@ class Command:
     def process(self, player, world):
         pass
 
+class SayCommand(Command):
+    def __init__(self) -> None:
+        super().__init__(2)
+    
+    def process(self, player, world):
+        message = ' '.join(self.arguments[:-1])
+        other = self.arguments[-1].capitalize()
+        world.send_message_to_player(world.get_player_with_name(other), f"{player.name} says to you, '{message}'.")
+        return f"You speak to {other}."
+
+class ShoutCommand(Command):
+    def __init__(self) -> None:
+        super().__init__(1)
+    
+    def process(self, player, world):
+        world.send_message_to_players_in_room(player, f"You hear {player.name} shout out, saying '{' '.join(self.arguments)}'.", player.current_room)
+        return "You shout."
+
 class JumpCommand(Command):
     def __init__(self) -> None:
         super().__init__(0)
@@ -89,3 +107,31 @@ class LookCommand(Command):
                 return "You don't see that."
         else:
             return world.state.current_room.describe()
+
+commands = {
+    'jump': JumpCommand(),
+
+    'move': MoveCommand(),
+    'walk': MoveCommand(),
+    'go': MoveCommand(),
+    'm': MoveCommand(),
+
+    'grab': GrabCommand(),
+    'get': GrabCommand(),
+    'take': GrabCommand(),
+    'g': GrabCommand(),
+
+    'use': UseCommand(),
+    'u': UseCommand(),
+
+    'look': LookCommand(),
+    'l': LookCommand(),
+
+    'say': SayCommand(),
+    'talk': SayCommand(),
+    's': SayCommand(),
+
+    'shout': ShoutCommand(),
+    'yell': ShoutCommand(),
+    'sh': ShoutCommand()
+}

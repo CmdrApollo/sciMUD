@@ -67,25 +67,6 @@ class Player:
                         self.potential_name = ''
                 
                 return "Enter your character's name:\n"
-
-        commands = {
-            'jump': JumpCommand(),
-
-            'move': MoveCommand(),
-            'go': MoveCommand(),
-            'm': MoveCommand(),
-
-            'grab': GrabCommand(),
-            'get': GrabCommand(),
-            'take': GrabCommand(),
-            'g': GrabCommand(),
-
-            'use': UseCommand(),
-            'u': UseCommand(),
-
-            'look': LookCommand(),
-            'l': LookCommand()
-        }
         
         stripped_text = text.lower().strip()
 
