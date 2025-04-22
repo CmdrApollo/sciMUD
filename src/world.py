@@ -5,8 +5,9 @@ import json
 from rooms import Room
 from player import Player
 from commands import *
+from colors import *
 
-nothing_message = "You do nothing."
+nothing_message = colored("You do nothing.", yellow)
 forbidden_words = ['to', 'on', 'a', 'an', 'the', 'for', 'towards', 'at', 'with']
 
 class WorldState:
@@ -48,7 +49,7 @@ class World:
         if self.state.just_started:
             self.state.just_started = False
 
-            return "Welcome To:\n\n" \
+            return "Welcome To\n\n" \
             "                          __  \n" \
             "          |\\  /|  |   |  |  \\ \n" \
             "    |   | | \\/ |  |   |  |   | \n" \
@@ -95,7 +96,7 @@ class World:
                 self.command.arguments = args
                 return self.command.process(self.state)
             else:
-                return f"Incorrect number of arguments. Expected (at least) {len(self.command.arguments)}."
+                return colored(f"Incorrect number of arguments. Expected (at least) {len(self.command.arguments)}.", red)
         else:
             return nothing_message
     

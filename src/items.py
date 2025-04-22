@@ -26,7 +26,7 @@ class Knife(Item):
         if self.try_use(recipient, game):
             if recipient in game.current_room.entities:
                 game.current_room.entities.remove(recipient)
-                return f"You use the knife on the {recipient}."
+                return f"You viciously stab the {recipient}."
             else:
                 return f"There is no {recipient} here."
         return self.fail_message
