@@ -7,7 +7,7 @@ from world import World
 from player import Player
 import config
 
-sel = selectors.DefaultSelector()
+selector = selectors.DefaultSelector()
 
 world = World()
 
@@ -22,7 +22,7 @@ def accept_wrapper(sock):
     
     data = types.SimpleNamespace(addr=addr, inb=b"", outb=b"")
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
-    sel.register(conn, events, data=data)
+    selector.register(conn, events, data=data)
     
     world.players.update({ addr: Player(world) })
 
@@ -56,7 +56,7 @@ def service_connection(key, mask) -> None:
                 pass
 
             print(f"Closing connection to {data.addr}.")
-            sel.unregister(sock)
+            selector.unregister(sock)
             sock.close()
 
     if mask & selectors.EVENT_WRITE:
@@ -84,11 +84,11 @@ sock.bind((host, port))
 sock.listen()
 
 sock.setblocking(False)
-sel.register(sock, selectors.EVENT_READ, data=None)
+selector.register(sock, selectors.EVENT_READ, data=None)
 
 try:
     while True:
-        events = sel.select(timeout=None)
+        events = selector.select(timeout=None)
         for key, mask in events:
             if key.data is None:
                 accept_wrapper(key.fileobj)
@@ -97,4 +97,4 @@ try:
 except KeyboardInterrupt:
     print("Caught keyboard interrupt, shutting down server.")
 finally:
-    sel.close()
+    selector.close()
