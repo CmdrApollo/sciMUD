@@ -38,11 +38,8 @@ class World:
         self.state: WorldState = WorldState()
         self.command: Command = None
         self.players: dict[str, Player] = {}
-
-    '''
-    Takes a string as input and echoes it to the currently active room in the world. What if there are multiple active rooms?
-    This could become a problem later when we implement summoning and the players are in different rooms.
-    For now let's just pretend that doesn't happen.
-    '''
-    def room_message(self, message: str):
-        pass #write this later
+        
+    def send_message_to_players_in_room(self, from_player: Player, message: str, room: str) -> None:
+        for _, player in self.players.items():
+            if player.current_room == room and player.name and player != from_player:
+                player.message_from_world = message

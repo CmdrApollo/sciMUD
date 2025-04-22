@@ -26,6 +26,7 @@ class Knife(Item):
         if self.try_use(recipient, player, world):
             if recipient in world.state.get_room(player.current_room).entities:
                 world.state.get_room(player.current_room).entities.remove(recipient)
+                world.send_message_to_players_in_room(player, f"Player '{player.name}' stabs the {recipient}.", player.current_room)
                 return f"You viciously stab the {recipient}."
             else:
                 return f"There is no {recipient} here."

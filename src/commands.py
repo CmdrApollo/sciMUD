@@ -12,6 +12,7 @@ class JumpCommand(Command):
         super().__init__(0)
     
     def process(self, player, world):
+        world.send_message_to_players_in_room(player, f"Player '{player.name}' jumps.", player.current_room)
         return "You jump."
 
 class MoveCommand(Command):
@@ -25,6 +26,8 @@ class MoveCommand(Command):
             return f"Invalid argument: '{self.arguments[0]}'"
         
         if player_room.neighbors[self.arguments[0]] != None:
+            world.send_message_to_players_in_room(player, f"Player '{player.name}' walks into the room.", player_room.neighbors[self.arguments[0]])
+
             player.current_room = player_room.neighbors[self.arguments[0]]
             player_room = world.state.get_room(player.current_room)
 
@@ -46,6 +49,8 @@ class GrabCommand(Command):
 
         player_room.items.remove(item)
         player.inventory.append(get_item_with_name(item))
+
+        world.send_message_to_players_in_room(player, f"Player '{player.name}' grabs {item}.", player.current_room)
 
         return f"You grab the {item}."
 

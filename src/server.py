@@ -11,6 +11,8 @@ sel = selectors.DefaultSelector()
 
 world = World()
 
+MAX_BYTES = 1024
+
 def accept_wrapper(sock):
     conn, addr = sock.accept()
     
@@ -29,7 +31,7 @@ def service_connection(key, mask) -> None:
     data = key.data
 
     if mask & selectors.EVENT_READ:
-        recv_data = sock.recv(1024)
+        recv_data = sock.recv(MAX_BYTES)
 
         if recv_data:
             text = recv_data.decode('utf-8')

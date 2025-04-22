@@ -6,6 +6,9 @@ forbidden_words = ['to', 'on', 'a', 'an', 'the', 'for', 'towards', 'at', 'with']
 
 class Player:
     def __init__(self, world):
+        self.potential_name = ""
+        self.name = ""
+
         self.health = 10
         self.max_health = self.health
 
@@ -19,7 +22,9 @@ class Player:
         self.world = world
 
         self.current_room = world.state.global_rooms[0].name
-    
+
+        self.message_from_world = ""
+
     def prompt(self):
         if self.just_started:
             self.just_started = False
@@ -31,14 +36,38 @@ class Player:
             f"{colored('|/\\ |   |', magenta)} {colored('|    |  |   |  |   | ', red)}\n" \
             f"{colored('|   | /\\|', magenta)} {colored('|    |  |   |  |   | ', red)}\n" \
             f"{colored('|   | \\/|', magenta)} {colored('|    |.  \\__|. |__/. ', red)}\n" \
-            f"\n{self.world.state.get_room(self.current_room).describe()}\n" 
+            "\nEnter your character's name:\n" 
         else:
+            if self.message_from_world:
+                m = self.message_from_world
+                self.message_from_world = ""
+                return m
             return ""
 
-    def parse(self, text: str) -> None:
+    def parse(self, text: str) -> str:
         if not len(text):
             return nothing_message
         
+        if self.name == "":
+            if self.potential_name == "":
+                self.potential_name = text.lower().strip().capitalize()
+            
+                return f"Really name your character '{self.potential_name}'? (y/n)"
+            else:
+                match text.lower().strip():
+                    case 'y':
+                        self.name = self.potential_name
+
+                        self.world.send_message_to_players_in_room(self, f"Player '{self.name}' joins the game.", self.current_room)
+
+                        return self.world.state.get_room(self.current_room).describe()
+                    case 'n':
+                        self.potential_name = ''
+                    case _:
+                        self.potential_name = ''
+                
+                return "Enter your character's name:\n"
+
         commands = {
             'jump': JumpCommand(),
 
