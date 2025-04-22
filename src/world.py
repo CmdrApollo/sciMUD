@@ -8,7 +8,7 @@ from commands import *
 from colors import *
 
 class WorldState:
-    def __init__(self) -> None:
+    def __init__(self, world) -> None:
         self.just_started = True
 
         self.global_rooms = []
@@ -17,7 +17,7 @@ class WorldState:
             data = json.load(f)
 
             for room in data["rooms"]:
-                self.global_rooms.append(Room(room["name"], room["description"], room["items"], room["entities"], {
+                self.global_rooms.append(Room(world, room["name"], room["description"], room["items"], room["entities"], {
                     'north': room["north"],
                     'south': room["south"],
                     'east': room["east"],
@@ -35,7 +35,7 @@ class WorldState:
 
 class World:
     def __init__(self) -> None:
-        self.state: WorldState = WorldState()
+        self.state: WorldState = WorldState(self)
         self.command: Command = None
         self.players: dict[str, Player] = {}
     

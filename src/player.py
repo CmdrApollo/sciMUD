@@ -60,7 +60,7 @@ class Player:
 
                         self.world.send_message_to_players_in_room(self, f"Player '{self.name}' joins the game.", self.current_room)
 
-                        return self.world.state.get_room(self.current_room).describe()
+                        return self.world.state.get_room(self.current_room).describe(self)
                     case 'n':
                         self.potential_name = ''
                     case _:

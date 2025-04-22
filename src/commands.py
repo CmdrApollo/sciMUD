@@ -14,8 +14,15 @@ class SayCommand(Command):
     def process(self, player, world):
         message = ' '.join(self.arguments[:-1])
         other = self.arguments[-1].capitalize()
-        world.send_message_to_player(world.get_player_with_name(other), f"{player.name} says to you, '{message}'.")
-        return f"You speak to {other}."
+        other_obj = world.get_player_with_name(other)
+        if other_obj:
+            if other_obj.current_room == player.current_room:
+                world.send_message_to_player(other_obj, f"{player.name} says to you, '{message}'.")
+                return f"You speak to {other}."
+            else:
+                return f"{other} is not in the same room as you."
+        else:
+            return f"{other} does not exist."
 
 class ShoutCommand(Command):
     def __init__(self) -> None:
@@ -44,12 +51,14 @@ class MoveCommand(Command):
             return f"Invalid argument: '{self.arguments[0]}'"
         
         if player_room.neighbors[self.arguments[0]] != None:
+            world.send_message_to_players_in_room(player, f"Player '{player.name}' leaves the room.", player.current_room)
+
             world.send_message_to_players_in_room(player, f"Player '{player.name}' walks into the room.", player_room.neighbors[self.arguments[0]])
 
             player.current_room = player_room.neighbors[self.arguments[0]]
             player_room = world.state.get_room(player.current_room)
 
-            return f"You move {self.arguments[0]}.\n{player_room.describe()}"
+            return f"You move {self.arguments[0]}.\n{player_room.describe(player)}"
         else:
             return "There is no room in that direction."
 
@@ -106,7 +115,7 @@ class LookCommand(Command):
             else:
                 return "You don't see that."
         else:
-            return world.state.current_room.describe()
+            return world.state.get_room(player.current_room).describe(player)
 
 commands = {
     'jump': JumpCommand(),
