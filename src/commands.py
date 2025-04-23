@@ -117,6 +117,15 @@ class LookCommand(Command):
         else:
             return world.state.get_room(player.current_room).describe(player)
 
+class HeatCommand(Command):
+    def __init__(self):
+        super().__init__(1)
+
+    def process(self, player, world):
+        world.send_message_to_players_in_room(player, f"{player.name} huddles next to you, restoring some of your warmth.", player.current_room)
+        return f"You huddle next to {self.arguments[0]}. It restores their warmth."
+
+
 commands = {
     'jump': JumpCommand(),
 
@@ -142,5 +151,10 @@ commands = {
 
     'shout': ShoutCommand(),
     'yell': ShoutCommand(),
-    'sh': ShoutCommand()
+    'sh': ShoutCommand(),
+
+    'heat': HeatCommand(),
+    'warm': HeatCommand(),
+    'cuddle': HeatCommand()
+
 }
