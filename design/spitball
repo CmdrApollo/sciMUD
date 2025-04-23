@@ -15,6 +15,10 @@ gameplay:
 overworld, towns, npcs, dungeons, monsters, combat, quests, etc.
 it is possible for players to summon each other to their worlds or possibly invade each others' worlds
 
+temperature meter: your temperature is constantly dropping and you have to find ways to stay warm.
+torches, fireplaces, campfires, body heat
+use these to increase your temperature. don't bother implementing too hot because it's too cold lol.
+you can use other players bodyheat, but it only works well if the other player isn't too cold.
 
 characters:
 stats, skills/traits/perks, hp, mp
