@@ -22,7 +22,7 @@ class SayCommand(Command):
             else:
                 return f"{other} is not in the same room as you."
         else:
-            return f"{other} does not exist."
+            return f"Player '{other}' does not exist."
 
 class ShoutCommand(Command):
     def __init__(self) -> None:
@@ -122,9 +122,16 @@ class HeatCommand(Command):
         super().__init__(1)
 
     def process(self, player, world):
-        world.send_message_to_players_in_room(player, f"{player.name} huddles next to you, restoring some of your warmth.", player.current_room)
-        return f"You huddle next to {self.arguments[0]}. It restores their warmth."
-
+        other = self.arguments[-1].capitalize()
+        other_obj = world.get_player_with_name(other)
+        if other_obj:
+            if other_obj.current_room == player.current_room:
+                world.send_message_to_player(other_obj, f"{player.name} huddles next to you, restoring some of your warmth.")
+                return f"You huddle next to {other}. You feel warm."
+            else:
+                return f"{other} is not in the same room as you."
+        else:
+            return f"Player '{other}' does not exist."
 
 commands = {
     'jump': JumpCommand(),
@@ -156,5 +163,4 @@ commands = {
     'heat': HeatCommand(),
     'warm': HeatCommand(),
     'cuddle': HeatCommand()
-
 }
