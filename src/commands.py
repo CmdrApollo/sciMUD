@@ -2,7 +2,8 @@ from items import get_item_with_name
 
 class Command:
     def __init__(self, number_arguments: int) -> None:
-        self.arguments: list[str] = [''] * number_arguments
+        self.number_arguments: int = number_arguments
+        self.arguments: list[str] = [''] * self.number_arguments
     
     def process(self, player, world):
         pass

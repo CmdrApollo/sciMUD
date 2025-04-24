@@ -15,6 +15,9 @@ class Player:
         self.magic = 10
         self.max_magic = self.magic
 
+        self.temperature = 100
+        self.max_temperature = self.temperature
+
         self.inventory = []
 
         self.just_started = True
@@ -77,7 +80,7 @@ class Player:
 
         if verb in commands:
             self.command = commands[verb]
-            if len(args) >= len(self.command.arguments):
+            if len(args) >= self.command.number_arguments:
                 self.command.arguments = args
                 return self.command.process(self, self.world)
             else:
