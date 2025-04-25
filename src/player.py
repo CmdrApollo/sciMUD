@@ -33,12 +33,14 @@ class Player:
             self.just_started = False
 
             return "Welcome To\n\n" \
-            f"                          {colored('__  ', red)}\n" \
-            f"          {colored('|\\  /|  |   |  |  \\ ', red)}\n" \
-            f"{colored('    |   |', magenta)} {colored('| \\/ |  |   |  |   | ', red)}\n" \
-            f"{colored('|/\\ |   |', magenta)} {colored('|    |  |   |  |   | ', red)}\n" \
-            f"{colored('|   | /\\|', magenta)} {colored('|    |  |   |  |   | ', red)}\n" \
-            f"{colored('|   | \\/|', magenta)} {colored('|    |.  \\__|. |__/. ', red)}\n" \
+            "==============================\n" \
+            f"                          {colored('__  ', green)}\n" \
+            f"          {colored('|\\  /|  |   |  |  \\ ', green)}\n" \
+            f"{colored('    |   |', cyan)} {colored('| \\/ |  |   |  |   | ', green)}\n" \
+            f"{colored('|/\\ |   |', cyan)} {colored('|    |  |   |  |   | ', green)}\n" \
+            f"{colored('|   | /\\|', cyan)} {colored('|    |  |   |  |   | ', green)}\n" \
+            f"{colored('|   | \\/|', cyan)} {colored('|    |.  \\__|. |__/. ', green)}\n" \
+            "==============================\n" \
             "\nEnter your character's name:\n" 
         else:
             if self.message_from_world:
@@ -73,7 +75,8 @@ class Player:
         
         stripped_text = text.lower().strip()
 
-        stripped_text = stripped_text.replace('stab', 'use knife')
+        for a in aliases:
+            stripped_text = stripped_text.replace(a[0], a[1])
 
         verb, *args = stripped_text.split(' ')
         args = list(filter(lambda x: x not in forbidden_words, args))

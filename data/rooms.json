@@ -2,23 +2,36 @@
     "rooms": [
         {
             "name": "tavern",
-            "description": "You find yourself in a well-lit tavern. There are a few patrons sprinkled throughout the building. To the west you see a dingy store-room.",
+            "description": "A surprisingly well-lit tavern for this region. There are a few patrons sprinkled throughout the building. To the west you see the small village's main road.",
             "items": [],
             "entities": ["bartender"],
             "north": null,
             "south": null,
             "east": null,
-            "west": "dingy_room"
+            "west": "outside_1",
+            "drawing": "\n+-------+\n|       |\n|       |\n| r-X   |\n| |     |\n| r     |\n+-------+\n"
         },
         {
-            "name": "dingy_room",
+            "name": "outside_1",
             "description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
-            "items": ["knife"],
+            "items": [],
             "entities": [],
             "north": null,
+            "south": "outside_2",
+            "east": null,
+            "west": null,
+            "drawing": "\n+-------+\n|       |\n|       |\n|   X-r |\n|   |   |\n|   r   |\n+-------+\n"
+        },
+        {
+            "name": "outside_2",
+            "description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
+            "items": [],
+            "entities": [],
+            "north": "outside_1",
             "south": null,
-            "east": "tavern",
-            "west": null
+            "east": null,
+            "west": null,
+            "drawing": "\n+-------+\n|   r-r |\n|   |   |\n|   X   |\n|       |\n|       |\n+-------+\n"
         }
     ]
 }

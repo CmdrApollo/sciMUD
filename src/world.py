@@ -22,7 +22,7 @@ class WorldState:
                     'south': room["south"],
                     'east': room["east"],
                     'west': room["west"]
-                }))
+                }, room["drawing"]))
             
             f.close()
     
