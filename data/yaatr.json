@@ -1,0 +1,50 @@
+{
+	"rooms": [
+		{
+			"name": "tavern",
+			"description": "A surprisingly well-lit tavern for this region. There are a few patrons sprinkled throughout the building. To the west you see the small village's main road.",
+			"items": [],
+			"entities": [
+				"bartender"
+			],
+			"north": null,
+			"south": null,
+			"east": "tavern_backroom",
+			"west": "outside_1",
+			"drawing": "+-----+\n|     |\n|     |\n|r-X-r|\n||    |\n|r    |\n+-----+"
+		},
+		{
+			"name": "outside_1",
+			"description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
+			"items": [],
+			"entities": [],
+			"north": null,
+			"south": "outside_2",
+			"east": "tavern",
+			"west": null,
+			"drawing": "+-----+\n|     |\n|     |\n|  X-r|\n|  |  |\n|  r  |\n+-----+"
+		},
+		{
+			"name": "outside_2",
+			"description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
+			"items": [],
+			"entities": [],
+			"north": "outside_1",
+			"south": null,
+			"east": null,
+			"west": null,
+			"drawing": "+-----+\n|  r-r|\n|  |  |\n|  X  |\n|     |\n|     |\n+-----+"
+		},
+		{
+			"name": "tavern_backroom",
+			"description": "Found in the back of the small tavern in Ya'atr, this room's main purpose is that of storage. Crates and boxes are littered throughout the room, some in piles that reach as tall as the ceiling. The floor is noticeably damp, partially rotting the wooden crates where they meet the floor.",
+			"items": [],
+			"entities": [],
+			"north": null,
+			"south": null,
+			"east": null,
+			"west": "tavern",
+			"drawing": "+-----+\n|     |\n|     |\n|r-X  |\n|     |\n|     |\n+-----+"
+		}
+	]
+}

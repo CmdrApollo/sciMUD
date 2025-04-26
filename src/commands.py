@@ -167,14 +167,5 @@ commands = {
 }
 
 aliases = [
-    ('stab', 'use knife'),
-
-    ('north', 'move north'),
-    ('east', 'move east'),
-    ('south', 'move south'),
-    ('west', 'move west'),
-    ('n', 'move north'),
-    ('e', 'move east'),
-    ('s', 'move south'),
-    ('w', 'move west')
+    ('stab', 'use knife')
 ]

@@ -15,4 +15,4 @@ class Room:
     def describe(self, player) -> str:
         players = list(filter(lambda p: p.current_room == self.name and p != player, self.world.players.values()))
 
-        return self.drawing + "\n" + self.description + (f"\nItems: {','.join([a.capitalize() for a in self.items])}" if len(self.items) else '') + (f"\nEntities: {','.join([a.capitalize() for a in self.entities])}" if len(self.entities) else '') + (f"\nPlayers: {','.join([p.name for p in players])}" if len(players) else '')
+        return self.drawing + "\n" + self.description + (f"\nItems: {', '.join([a.capitalize() for a in self.items])}" if len(self.items) else '') + (f"\nEntities: {', '.join([a.capitalize() for a in self.entities])}" if len(self.entities) else '') + (f"\nPlayers: {', '.join([p.name for p in players])}" if len(players) else '')
