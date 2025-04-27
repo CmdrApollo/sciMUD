@@ -68,7 +68,7 @@ class GrabCommand(Command):
         super().__init__(1)
     
     def process(self, player, world) -> str:
-        item = self.arguments[0]
+        item = ' '.join(self.arguments).lower()
 
         player_room = world.state.get_room(player.current_room)
 

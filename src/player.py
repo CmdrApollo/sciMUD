@@ -33,14 +33,14 @@ class Player:
             self.just_started = False
 
             return "Welcome To\n\n" \
-            "==============================\n" \
-            f"                          {colored('__  ', green)}\n" \
-            f"          {colored('|\\  /|  |   |  |  \\ ', green)}\n" \
-            f"{colored('    |   |', cyan)} {colored('| \\/ |  |   |  |   | ', green)}\n" \
-            f"{colored('|/\\ |   |', cyan)} {colored('|    |  |   |  |   | ', green)}\n" \
-            f"{colored('|   | /\\|', cyan)} {colored('|    |  |   |  |   | ', green)}\n" \
-            f"{colored('|   | \\/|', cyan)} {colored('|    |.  \\__|. |__/. ', green)}\n" \
-            "==============================\n" \
+            "+------------------------------+\n" \
+            f"|                          {colored('__  ', green)}|\n" \
+            f"|          {colored('|\\  /|  |   |  |  \\ ', green)}|\n" \
+            f"|{colored('    |   |', cyan)} {colored('| \\/ |  |   |  |   |', green)}|\n" \
+            f"|{colored('|/\\ |   |', cyan)} {colored('|    |  |   |  |   |', green)}|\n" \
+            f"|{colored('|   | /\\|', cyan)} {colored('|    |  |   |  |   |', green)}|\n" \
+            f"|{colored('|   | \\/|', cyan)} {colored('|    |.  \\__|. |__/.', green)}|\n" \
+            "+------------------------------+\n" \
             "\nEnter your character's name:\n" 
         else:
             if self.message_from_world:

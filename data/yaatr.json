@@ -27,7 +27,9 @@
 		{
 			"name": "outside_2",
 			"description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
-			"items": [],
+			"items": [
+				"knife"
+			],
 			"entities": [],
 			"north": "outside_1",
 			"south": null,
@@ -38,7 +40,9 @@
 		{
 			"name": "tavern_backroom",
 			"description": "Found in the back of the small tavern in Ya'atr, this room's main purpose is that of storage. Crates and boxes are littered throughout the room, some in piles that reach as tall as the ceiling. The floor is noticeably damp, partially rotting the wooden crates where they meet the floor.",
-			"items": [],
+			"items": [
+				"shabby cloak"
+			],
 			"entities": [],
 			"north": null,
 			"south": null,
