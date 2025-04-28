@@ -4,6 +4,7 @@
 			"name": "dungeon_entrance_yaatr",
 			"description": "The entrance to the small dungeon in Ya'atr has a distinct musk about it. It smells of sewage and rank. The small dungeon, despite its size and reputation for low-level monsters and gear, scares you. Its maw has opened before you as you gaze into the abyss that is the belly of the beast.",
 			"items": [],
+			"hidden_items": [],
 			"entities": [],
 			"north": null,
 			"south": null,

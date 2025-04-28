@@ -15,7 +15,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 if os.path.exists(os.path.join('data', 'locations', 'yaatr.json')):
     rooms = [
-        Room(None, r['name'], r['description'], r['items'], r['entities'], {
+        Room(None, r['name'], r['description'], r['items'], r['hidden_items'], r['entities'], {
             'north': r['north'],
             'south': r['south'],
             'east': r['east'],
@@ -51,19 +51,22 @@ def generate_drawing(room):
             return
         
         for direction, updates in directions.items():
-            neighbor_id = room.neighbors[direction]
-            if neighbor_id:
-                for dy, dx, char in updates:
-                    if 1 <= x + dx < len(drawing[0]) - 1 and 1 <= y + dy < len(drawing) - 1:
-                        color = green
-                        if "road" in neighbor_id:
-                            color = yellow
-                        if char in ['-', '|']:
-                            color = white
-                        drawing[y + dy][x + dx] = colored(char, color)
-                    else:
-                        return
-                draw_neighbors(x + dx, y + dy, get_room(neighbor_id), depth + 1)
+            if not room:
+                drawing[y][x] = '$'
+            else:
+                neighbor_id = room.neighbors[direction]
+                if neighbor_id:
+                    for dy, dx, char in updates:
+                        if 1 <= x + dx < len(drawing[0]) - 1 and 1 <= y + dy < len(drawing) - 1:
+                            color = green
+                            if "road" in neighbor_id:
+                                color = yellow
+                            if char in ['-', '|']:
+                                color = white
+                            drawing[y + dy][x + dx] = colored(char, color)
+                        else:
+                            return
+                    draw_neighbors(x + dx, y + dy, get_room(neighbor_id), depth + 1)
 
     draw_neighbors(x, y, room)
 
@@ -94,6 +97,7 @@ def main():
                                 "name": r.name,
                                 "description": r.description,
                                 "items": r.items,
+                                "hidden_items": r.hidden_items,
                                 "entities": r.entities,
                                 "north": r.neighbors['north'],
                                 "south": r.neighbors['south'],
@@ -105,7 +109,7 @@ def main():
                         json.dump(data, open(os.path.join('data', 'locations', 'yaatr.json'), 'w'), indent='\t')
 
                     if event.key == pygame.K_UP and not current_room.neighbors['north']:
-                        rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], {
+                        rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], [], {
                             "north": None,
                             "south": current_room.name,
                             "east": None,
@@ -114,7 +118,7 @@ def main():
                         current_room.neighbors['north'] = rooms[-1].name
                         current_room = rooms[-1]
                     if event.key == pygame.K_DOWN and not current_room.neighbors['south']:
-                        rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], {
+                        rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], [], {
                             "north": current_room.name,
                             "south": None,
                             "east": None,
@@ -123,7 +127,7 @@ def main():
                         current_room.neighbors['south'] = rooms[-1].name
                         current_room = rooms[-1]
                     if event.key == pygame.K_RIGHT and not current_room.neighbors['east']:
-                        rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], {
+                        rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], [], {
                             "north": None,
                             "south": None,
                             "east": None,
@@ -132,7 +136,7 @@ def main():
                         current_room.neighbors['east'] = rooms[-1].name
                         current_room = rooms[-1]
                     if event.key == pygame.K_LEFT and not current_room.neighbors['west']:
-                        rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], {
+                        rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], [], {
                             "north": None,
                             "south": None,
                             "east": current_room.name,
@@ -180,6 +184,10 @@ def main():
                         a = askstring("items", "items")
                         current_room.items = [b.lower().strip() for b in a.split(',')]
 
+                    if event.key == pygame.K_h:
+                        a = askstring("hidden items", "hidden items")
+                        current_room.hidden_items = [b.lower().strip() for b in a.split(',')]
+
                     if event.key == pygame.K_t:
                         a = askstring("entities", "entities")
                         current_room.entities = [b.lower().strip() for b in a.split(',')]
@@ -200,6 +208,7 @@ def main():
         for line in [
             f"n[a]me: {current_room.name}",
             f"i]tems: {', '.join([a for a in current_room.items])}",
+            f"h]idden items: {', '.join([a for a in current_room.hidden_items])}",
             f"en[t]ities: {', '.join([a for a in current_room.entities])}",
         ]:
             WIN.blit(t := FONT.render(line, True, 'white'), (WIDTH - t.get_width(), y))
@@ -212,7 +221,15 @@ def main():
             x, y = WIDTH // 2, HEIGHT // 2
 
             for line in generate_drawing(room).splitlines():
-                WIN.blit(t := FONT.render(line, True, 'white'), (x - t.get_width() // 2, y - t.get_height() // 2))
+                l = line.replace('\u001b[0m', '')
+                l = l.replace('\u001b[31m', '')
+                l = l.replace('\u001b[32m', '')
+                l = l.replace('\u001b[33m', '')
+                l = l.replace('\u001b[34m', '')
+                l = l.replace('\u001b[35m', '')
+                l = l.replace('\u001b[36m', '')
+                l = l.replace('\u001b[37m', '')
+                WIN.blit(t := FONT.render(l, True, 'white'), (x - t.get_width() // 2, y - t.get_height() // 2))
                 y += t.get_height()
 
         pygame.display.flip()

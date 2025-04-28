@@ -118,6 +118,20 @@ class LookCommand(Command):
         else:
             return world.state.get_room(player.current_room).describe(player)
 
+class SearchCommand(Command):
+    def __init__(self):
+        super().__init__(0)
+    
+    def process(self, player, world) -> str:
+        # TODO make it so that individual players track revealed items
+        player_room = world.state.get_room(player.current_room)
+
+        if len(player_room.hidden_items):
+            player_room.items += player_room.hidden_items
+            return f"You dig through the room, you found {'some items' if len(player_room.hidden_items) > 1 else 'an item'}!"
+        
+        return "You search the room far and wide, but fail to find anything."
+
 class HeatCommand(Command):
     def __init__(self):
         super().__init__(1)
@@ -152,6 +166,9 @@ commands = {
 
     'look': LookCommand(),
     'l': LookCommand(),
+
+    'search': SearchCommand(),
+    'se': SearchCommand(),
 
     'say': SayCommand(),
     'talk': SayCommand(),

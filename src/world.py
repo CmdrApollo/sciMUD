@@ -18,7 +18,7 @@ class WorldState:
                 data = json.load(f)
 
                 for room in data["rooms"]:
-                    self.global_rooms.append(Room(world, room["name"], room["description"], room["items"], room["entities"], {
+                    self.global_rooms.append(Room(world, room["name"], room["description"], room["items"], room["hidden_items"], room["entities"], {
                         'north': room["north"],
                         'south': room["south"],
                         'east': room["east"],
