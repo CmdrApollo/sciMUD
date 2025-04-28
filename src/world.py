@@ -13,18 +13,19 @@ class WorldState:
 
         self.global_rooms = []
 
-        with open(os.path.join("data", "locations", "yaatr.json")) as f:
-            data = json.load(f)
+        for filename in ['yaatr.json', 'yaatr_dungeon.json']:
+            with open(os.path.join("data", "locations", filename)) as f:
+                data = json.load(f)
 
-            for room in data["rooms"]:
-                self.global_rooms.append(Room(world, room["name"], room["description"], room["items"], room["entities"], {
-                    'north': room["north"],
-                    'south': room["south"],
-                    'east': room["east"],
-                    'west': room["west"]
-                }, room["drawing"]))
-            
-            f.close()
+                for room in data["rooms"]:
+                    self.global_rooms.append(Room(world, room["name"], room["description"], room["items"], room["entities"], {
+                        'north': room["north"],
+                        'south': room["south"],
+                        'east': room["east"],
+                        'west': room["west"]
+                    }, room["drawing"]))
+                
+                f.close()
     
     def get_room(self, name: str) -> Room:
         for r in self.global_rooms:

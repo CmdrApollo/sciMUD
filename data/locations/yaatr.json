@@ -11,7 +11,7 @@
 			"south": null,
 			"east": "main_road1_yaatr",
 			"west": "tavern_backroom_yaatr",
-			"drawing": "+-----+\n|     |\n|     |\n|r-X-r|\n|    ||\n|    r|\n+-----+"
+			"drawing": "+-----+\n|     |\n|     |\n|\u001b[32mr\u001b[0m\u001b[37m-\u001b[0mX\u001b[37m-\u001b[0m\u001b[33mr\u001b[0m|\n|    \u001b[37m|\u001b[0m|\n|    \u001b[33mr\u001b[0m|\n+-----+"
 		},
 		{
 			"name": "tavern_backroom_yaatr",
@@ -24,7 +24,7 @@
 			"south": null,
 			"east": "tavern_yaatr",
 			"west": null,
-			"drawing": "+-----+\n|     |\n|     |\n|  X-r|\n|     |\n|     |\n+-----+"
+			"drawing": "+-----+\n|     |\n|     |\n|  X\u001b[37m-\u001b[0m\u001b[32mr\u001b[0m|\n|     |\n|     |\n+-----+"
 		},
 		{
 			"name": "main_road1_yaatr",
@@ -35,7 +35,7 @@
 			"south": "main_road_3_yaatr",
 			"east": "main_road2_yaatr",
 			"west": "tavern_yaatr",
-			"drawing": "+-----+\n|     |\n|     |\n|r-X-r|\n|  |  |\n|  r  |\n+-----+"
+			"drawing": "+-----+\n|     |\n|     |\n|\u001b[32mr\u001b[0m\u001b[37m-\u001b[0mX\u001b[37m-\u001b[0m\u001b[33mr\u001b[0m|\n|  \u001b[37m|\u001b[0m  |\n|  \u001b[33mr\u001b[0m  |\n+-----+"
 		},
 		{
 			"name": "main_road2_yaatr",
@@ -46,18 +46,18 @@
 			"south": null,
 			"east": "guild_hall_yaatr",
 			"west": "main_road1_yaatr",
-			"drawing": "+-----+\n|     |\n|     |\n|r-X-r|\n||    |\n|r    |\n+-----+"
+			"drawing": "+-----+\n|     |\n|     |\n|\u001b[33mr\u001b[0m\u001b[37m-\u001b[0mX\u001b[37m-\u001b[0m\u001b[32mr\u001b[0m|\n|\u001b[37m|\u001b[0m    |\n|\u001b[33mr\u001b[0m    |\n+-----+"
 		},
 		{
 			"name": "guild_hall_yaatr",
-			"description": "Guilds hall.",
+			"description": "Within the Guilds Hall, you feel an inviting aura that welcomes you into the building. The lighting, though dim, feels of home and reminds of a sweet ale upon the tongue, or a lover's embrace. You feel welcomed here. To the west you see Ya'atr's main road.",
 			"items": [],
 			"entities": [],
 			"north": null,
 			"south": null,
 			"east": null,
 			"west": "main_road2_yaatr",
-			"drawing": "+-----+\n|     |\n|     |\n|r-X  |\n|     |\n|     |\n+-----+"
+			"drawing": "+-----+\n|     |\n|     |\n|\u001b[33mr\u001b[0m\u001b[37m-\u001b[0mX  |\n|     |\n|     |\n+-----+"
 		},
 		{
 			"name": "main_road_3_yaatr",
@@ -68,7 +68,7 @@
 			"south": "main_road4_yaatr",
 			"east": null,
 			"west": null,
-			"drawing": "+-----+\n|r-r-r|\n|  |  |\n|  X  |\n|  |  |\n|  r  |\n+-----+"
+			"drawing": "+-----+\n|\u001b[32mr\u001b[0m\u001b[37m-\u001b[0m\u001b[33mr\u001b[0m\u001b[37m-\u001b[0m\u001b[33mr\u001b[0m|\n|  \u001b[37m|\u001b[0m  |\n|  X  |\n|  \u001b[37m|\u001b[0m  |\n|  \u001b[33mr\u001b[0m  |\n+-----+"
 		},
 		{
 			"name": "main_road4_yaatr",
@@ -76,13 +76,13 @@
 			"items": [],
 			"entities": [],
 			"north": "main_road_3_yaatr",
-			"south": "main_road_4_yaatr",
+			"south": "main_road5_yaatr",
 			"east": null,
 			"west": null,
-			"drawing": "+-----+\n|  r  |\n|  |  |\n|  X  |\n|  |  |\n|  r-r|\n+-----+"
+			"drawing": "+-----+\n|  \u001b[33mr\u001b[0m  |\n|  \u001b[37m|\u001b[0m  |\n|  X  |\n|  \u001b[37m|\u001b[0m  |\n|  \u001b[33mr\u001b[0m\u001b[37m-\u001b[0m\u001b[32mr\u001b[0m|\n+-----+"
 		},
 		{
-			"name": "main_road_4_yaatr",
+			"name": "main_road5_yaatr",
 			"description": "Directly to the east, you see a small dungeon. You recognize that this is the main selling point of this town, its dungeon. Many people find good money in clearing out dungeons. Many are willing to pay good coin to any adventurer brave enough to enter the labrynthian structure. It keeps the population safe and the adventurer's wallet happy.",
 			"items": [],
 			"entities": [],
@@ -90,18 +90,7 @@
 			"south": null,
 			"east": "dungeon_entrance_yaatr",
 			"west": null,
-			"drawing": "+-----+\n|  r  |\n|  |  |\n|  X-r|\n|     |\n|     |\n+-----+"
-		},
-		{
-			"name": "dungeon_entrance_yaatr",
-			"description": "The entrance to the small dungeon in Ya'atr has a distinct musk about it. It smells of sewage and rank. The small dungeon, despite its size and reputation for low-level monsters and gear, scares you. Its maw has opened before you as you gaze into the abyss that is the belly of the beast.",
-			"items": [],
-			"entities": [],
-			"north": null,
-			"south": null,
-			"east": null,
-			"west": "main_road_4_yaatr",
-			"drawing": "+-----+\n|r    |\n||    |\n|r-X  |\n|     |\n|     |\n+-----+"
+			"drawing": "+-----+\n|  \u001b[33mr\u001b[0m  |\n|  \u001b[37m|\u001b[0m  |\n|  X\u001b[37m-\u001b[0m\u001b[32mr\u001b[0m|\n|     |\n|     |\n+-----+"
 		}
 	]
 }

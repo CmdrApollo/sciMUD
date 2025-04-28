@@ -34,12 +34,12 @@ class Player:
 
             return "Welcome To\n\n" \
             "+-----------------------------+\n" \
-            f"|                         {colored('__  ', green)}|\n" \
-            f"|{colored(' _      ', cyan)} {colored('|\\  /|  |   |  |  \\ ', green)}|\n" \
-            f"|{colored('/ \\     ', cyan)} {colored('| \\/ |  |   |  |   |', green)}|\n" \
-            f"|{colored('\\_   _ o', cyan)} {colored('|    |  |   |  |   |', green)}|\n" \
-            f"|{colored('  \\ /  |', cyan)} {colored('|    |  |   |  |   |', green)}|\n" \
-            f"|{colored('\\_/ \\_ |', cyan)} {colored('|    |.  \\__|. |__/.', green)}|\n" \
+            f"|                        {colored('__  ', green)}|\n" \
+            f"|{colored('       ', cyan)} {colored('|\\  /|  |   |  |  \\ ', green)}|\n" \
+            f"|{colored('       ', cyan)} {colored('| \\/ |  |   |  |   |', green)}|\n" \
+            f"|{colored(' _  _ o', cyan)} {colored('|    |  |   |  |   |', green)}|\n" \
+            f"|{colored('(  /  |', cyan)} {colored('|    |  |   |  |   |', green)}|\n" \
+            f"|{colored('_) \\_ |', cyan)} {colored('|    |.  \\__|. |__/.', green)}|\n" \
             "+-----------------------------+\n" \
             "\nEnter your character's name:\n" 
         else:

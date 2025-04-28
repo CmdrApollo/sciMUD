@@ -2,6 +2,7 @@ import pygame
 import os
 import json
 from tkinter.simpledialog import askstring
+from src.colors import *
 
 from src.rooms import Room
 
@@ -54,7 +55,12 @@ def generate_drawing(room):
             if neighbor_id:
                 for dy, dx, char in updates:
                     if 1 <= x + dx < len(drawing[0]) - 1 and 1 <= y + dy < len(drawing) - 1:
-                        drawing[y + dy][x + dx] = char
+                        color = green
+                        if "road" in neighbor_id:
+                            color = yellow
+                        if char in ['-', '|']:
+                            color = white
+                        drawing[y + dy][x + dx] = colored(char, color)
                     else:
                         return
                 draw_neighbors(x + dx, y + dy, get_room(neighbor_id), depth + 1)
