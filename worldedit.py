@@ -8,9 +8,9 @@ from src.rooms import Room
 
 pygame.init()
 
-FONT = pygame.font.SysFont("courier", 24)
+FONT = pygame.font.SysFont("courier", 20)
 
-WIDTH, HEIGHT = 640, 480
+WIDTH, HEIGHT = 800, 600
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 if os.path.exists(os.path.join('data', 'locations', 'yaatr_dungeon.json')):
