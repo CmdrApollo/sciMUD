@@ -16,10 +16,7 @@
 		{
 			"name": "outside_1",
 			"description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
-			"items": [
-				"sword",
-				"dildo"
-			],
+			"items": [],
 			"entities": [],
 			"north": null,
 			"south": "outside_2",

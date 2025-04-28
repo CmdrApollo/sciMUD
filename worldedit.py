@@ -12,7 +12,7 @@ FONT = pygame.font.SysFont("courier", 24)
 WIDTH, HEIGHT = 640, 480
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
-if os.path.exists(os.path.join('data', 'yaatr.json')):
+if os.path.exists(os.path.join('data', 'locations', 'yaatr.json')):
     rooms = [
         Room(None, r['name'], r['description'], r['items'], r['entities'], {
             'north': r['north'],

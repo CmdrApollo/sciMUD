@@ -13,7 +13,7 @@ class WorldState:
 
         self.global_rooms = []
 
-        with open(os.path.join("data", "yaatr.json")) as f:
+        with open(os.path.join("data", "locations", "yaatr.json")) as f:
             data = json.load(f)
 
             for room in data["rooms"]:
