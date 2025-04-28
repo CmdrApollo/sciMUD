@@ -4,7 +4,8 @@ yellow = '33'
 blue = '34'
 magenta = '35'
 cyan = '36'
-white = '37'
+gray = '37'
+white = '97'
 
 def colored(text: str, color: str) -> str:
     return f"\033[{color}m{text}\033[0m"

@@ -32,16 +32,24 @@ class Player:
         if self.just_started:
             self.just_started = False
 
-            return "Welcome To\n\n" \
-            "+-----------------------------+\n" \
-            f"|                        {colored('__  ', green)}|\n" \
-            f"|{colored('       ', cyan)} {colored('|\\  /|  |   |  |  \\ ', green)}|\n" \
-            f"|{colored('       ', cyan)} {colored('| \\/ |  |   |  |   |', green)}|\n" \
-            f"|{colored(' _  _ o', cyan)} {colored('|    |  |   |  |   |', green)}|\n" \
-            f"|{colored('(  /  |', cyan)} {colored('|    |  |   |  |   |', green)}|\n" \
-            f"|{colored('_) \\_ |', cyan)} {colored('|    |.  \\__|. |__/.', green)}|\n" \
-            "+-----------------------------+\n" \
-            "\nEnter your character's name:\n" 
+            return "".join(["Welcome To\n\n",
+            colored("  .=*888888888h.                  ", gray) + colored("    j&                                        \n", white),
+            colored(" h8888888888888*            &h    ", gray) + colored("   j 8 j8h.  &8h.   &.     h.            &.   \n", white),
+            colored("88h.                8             ", gray) + colored("  j* h8   *;8j ;88  h8     88            88   \n", white),
+            colored("&8888888888888h.  .h        h     ", gray) + colored("j&*  h8    88   88  h8     88            88   \n", white),
+            colored(" *8888888888888h jh8       8h          ", gray) + colored("j8    &h   &j  h8     88      j888h.88   \n", white),
+            colored("              .hj*h.      j &.         ", gray) + colored("h8    h8  *8   h8     88    j=     888   \n", white),
+            colored(".j8888888888888*  *88888=h  *88888h.   ", gray) + colored("h8    h8  88  j**;   j88   j*8    j888  j\n", white),
+            colored("!8888888888888*    *88888*   *88888*   ", gray) + colored("&;    *&  *&=j*  *;8j**&==j  ;=&8j***&=j*\n", white),
+            "\nEnter your character's name:\n"])
+            # "+-----------------------------+\n",
+            # f"|                        {colored('__  ', green)}|\n",
+            # f"|{colored('       ', cyan)} {colored('|\\  /|  |   |  |  \\ ', green)}|\n",
+            # f"|{colored('       ', cyan)} {colored('| \\/ |  |   |  |   |', green)}|\n",
+            # f"|{colored(' _  _ o', cyan)} {colored('|    |  |   |  |   |', green)}|\n",
+            # f"|{colored('(  /  |', cyan)} {colored('|    |  |   |  |   |', green)}|\n",
+            # f"|{colored('_) \\_ |', cyan)} {colored('|    |.  \\__|. |__/.', green)}|\n",
+            # "+-----------------------------+\n"])
         else:
             if self.message_from_world:
                 m = self.message_from_world
