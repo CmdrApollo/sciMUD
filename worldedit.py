@@ -20,7 +20,7 @@ if os.path.exists(os.path.join('data', 'locations', 'yaatr.json')):
             'east': r['east'],
             'west': r['west']
         }, r['drawing'])
-        for r in json.load(open(os.path.join('data', 'yaatr.json')))["rooms"]
+        for r in json.load(open(os.path.join('data', 'locations', 'yaatr.json')))["rooms"]
     ]
 else:
     rooms = []
@@ -96,7 +96,7 @@ def main():
                                 "drawing": generate_drawing(r)
                             })
                         
-                        json.dump(data, open(os.path.join('data', 'yaatr.json'), 'w'), indent='\t')
+                        json.dump(data, open(os.path.join('data', 'locations', 'yaatr.json'), 'w'), indent='\t')
 
                     if event.key == pygame.K_UP and not current_room.neighbors['north']:
                         rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], {

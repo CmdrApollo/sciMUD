@@ -40,7 +40,11 @@ class Knife(Weapon):
             'strength': 10,
             'attack': 2,
         })
-    
+
+weapons: list[Weapon] = list()
+#consumables: list[Consumable] = list()
+#wearables: list[Wearable] = list()
+
 def get_item_with_name(name: str) -> Item:
     match name:
         case "knife":

@@ -1,7 +1,7 @@
 {
 	"rooms": [
 		{
-			"name": "tavern",
+			"name": "tavern_yaatr",
 			"description": "A surprisingly well-lit tavern for this region. There are a few patrons sprinkled throughout the building. To the west you see the small village's main road.",
 			"items": [],
 			"entities": [
@@ -9,36 +9,12 @@
 			],
 			"north": null,
 			"south": null,
-			"east": "tavern_backroom",
-			"west": "outside_1",
-			"drawing": "+-----+\n|     |\n|     |\n|r-X-r|\n||    |\n|r    |\n+-----+"
+			"east": "main_road1_yaatr",
+			"west": "tavern_backroom_yaatr",
+			"drawing": "+-----+\n|     |\n|     |\n|r-X-r|\n|    ||\n|    r|\n+-----+"
 		},
 		{
-			"name": "outside_1",
-			"description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
-			"items": [],
-			"entities": [],
-			"north": null,
-			"south": "outside_2",
-			"east": "tavern",
-			"west": null,
-			"drawing": "+-----+\n|     |\n|     |\n|  X-r|\n|  |  |\n|  r  |\n+-----+"
-		},
-		{
-			"name": "outside_2",
-			"description": "You walk into the dingy room. You can hardly see. To the east you see a well lit tavern.",
-			"items": [
-				"knife"
-			],
-			"entities": [],
-			"north": "outside_1",
-			"south": null,
-			"east": null,
-			"west": null,
-			"drawing": "+-----+\n|  r-r|\n|  |  |\n|  X  |\n|     |\n|     |\n+-----+"
-		},
-		{
-			"name": "tavern_backroom",
+			"name": "tavern_backroom_yaatr",
 			"description": "Found in the back of the small tavern in Ya'atr, this room's main purpose is that of storage. Crates and boxes are littered throughout the room, some in piles that reach as tall as the ceiling. The floor is noticeably damp, partially rotting the wooden crates where they meet the floor.",
 			"items": [
 				"shabby cloak"
@@ -46,9 +22,64 @@
 			"entities": [],
 			"north": null,
 			"south": null,
+			"east": "tavern_yaatr",
+			"west": null,
+			"drawing": "+-----+\n|     |\n|     |\n|  X-r|\n|     |\n|     |\n+-----+"
+		},
+		{
+			"name": "main_road1_yaatr",
+			"description": "As you step onto the village's main road, there is a notable scent of smoke and ash coming from the northern direction. To the west you see a small tavern, and a small ways to the east, you spot the Ya'atr guilds hall.",
+			"items": [],
+			"entities": [],
+			"north": null,
+			"south": "main_road_3_yaatr",
+			"east": "main_road2_yaatr",
+			"west": "tavern_yaatr",
+			"drawing": "+-----+\n|     |\n|     |\n|r-X-r|\n|  |  |\n|  r  |\n+-----+"
+		},
+		{
+			"name": "main_road2_yaatr",
+			"description": "As you walk down the road, you realize that Ya'atr feels very quaint. Somehow, it feels familiar, giving you memories of your home village in Ashari lands. In many ways, the two were one and the same in your mind. And in yet others, they were not.",
+			"items": [],
+			"entities": [],
+			"north": null,
+			"south": null,
+			"east": "guild_hall_yaatr",
+			"west": "main_road1_yaatr",
+			"drawing": "+-----+\n|     |\n|     |\n|r-X-r|\n||    |\n|r    |\n+-----+"
+		},
+		{
+			"name": "guild_hall_yaatr",
+			"description": "Guilds hall.",
+			"items": [],
+			"entities": [],
+			"north": null,
+			"south": null,
 			"east": null,
-			"west": "tavern",
+			"west": "main_road2_yaatr",
 			"drawing": "+-----+\n|     |\n|     |\n|r-X  |\n|     |\n|     |\n+-----+"
+		},
+		{
+			"name": "main_road_3_yaatr",
+			"description": "The smell of smoke is less noticable here, though still quite pertinent. You wonder what the cause could be: A campfire? A forest-fire? Your find your thoughts wander as you continue to walk.",
+			"items": [],
+			"entities": [],
+			"north": "main_road1_yaatr",
+			"south": "main_road4_yaatr",
+			"east": null,
+			"west": null,
+			"drawing": "+-----+\n|r-r-r|\n|  |  |\n|  X  |\n|  |  |\n|  r  |\n+-----+"
+		},
+		{
+			"name": "main_road4_yaatr",
+			"description": "The darkness of this region is already starting to get to you. It feels so isolated and desolate, despite the many people that inhabit these lands. You wonder how they manage to do so and upkeep such a cheery demeanor, able to weather the never-ending horde of newcomers from Ashari territory. You suppose you should count yourself lucky.",
+			"items": [],
+			"entities": [],
+			"north": "main_road_3_yaatr",
+			"south": null,
+			"east": null,
+			"west": null,
+			"drawing": "+-----+\n|  r  |\n|  |  |\n|  X  |\n|     |\n|     |\n+-----+"
 		}
 	]
 }

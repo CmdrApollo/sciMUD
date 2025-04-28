@@ -3,6 +3,8 @@ import socket
 import selectors
 import types
 
+from colors import *
+
 from world import World
 from player import Player
 import config
@@ -43,7 +45,7 @@ def service_connection(key, mask) -> None:
 
                 output = current_player.parse(text)
             else:
-                output = "An error occured with the server."
+                output = colored("An error occured with the server.", red)
             
             out_data = output.encode('utf-8')
             sent = sock.send(out_data)

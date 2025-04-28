@@ -39,7 +39,7 @@ class JumpCommand(Command):
     
     def process(self, player, world):
         world.send_message_to_players_in_room(player, f"Player '{player.name}' jumps.", player.current_room)
-        return "You jump. Boing boing."
+        return "You jump."
 
 class MoveCommand(Command):
     def __init__(self) -> None:
