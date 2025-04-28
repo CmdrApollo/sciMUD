@@ -39,7 +39,7 @@
 		},
 		{
 			"name": "main_road2_yaatr",
-			"description": "As you walk down the road, you realize that Ya'atr feels very quaint. Somehow, it feels familiar, giving you memories of your home village in Ashari lands. In many ways, the two were one and the same in your mind. And in yet others, they were not.",
+			"description": "As you walk down the road, you realize that Ya'atr feels very quaint. Somehow, it feels familiar, giving you memories of your home village in Ashari lands. In many ways, the two are one and the same in your mind. And in yet others, they are not. Directly to the east lies the Guilds Hall of Ya'atr",
 			"items": [],
 			"entities": [],
 			"north": null,
@@ -76,10 +76,32 @@
 			"items": [],
 			"entities": [],
 			"north": "main_road_3_yaatr",
-			"south": null,
+			"south": "main_road_4_yaatr",
 			"east": null,
 			"west": null,
-			"drawing": "+-----+\n|  r  |\n|  |  |\n|  X  |\n|     |\n|     |\n+-----+"
+			"drawing": "+-----+\n|  r  |\n|  |  |\n|  X  |\n|  |  |\n|  r-r|\n+-----+"
+		},
+		{
+			"name": "main_road_4_yaatr",
+			"description": "Directly to the east, you see a small dungeon. You recognize that this is the main selling point of this town, its dungeon. Many people find good money in clearing out dungeons. Many are willing to pay good coin to any adventurer brave enough to enter the labrynthian structure. It keeps the population safe and the adventurer's wallet happy.",
+			"items": [],
+			"entities": [],
+			"north": "main_road4_yaatr",
+			"south": null,
+			"east": "dungeon_entrance_yaatr",
+			"west": null,
+			"drawing": "+-----+\n|  r  |\n|  |  |\n|  X-r|\n|     |\n|     |\n+-----+"
+		},
+		{
+			"name": "dungeon_entrance_yaatr",
+			"description": "The entrance to the small dungeon in Ya'atr has a distinct musk about it. It smells of sewage and rank. The small dungeon, despite its size and reputation for low-level monsters and gear, scares you. Its maw has opened before you as you gaze into the abyss that is the belly of the beast.",
+			"items": [],
+			"entities": [],
+			"north": null,
+			"south": null,
+			"east": null,
+			"west": "main_road_4_yaatr",
+			"drawing": "+-----+\n|r    |\n||    |\n|r-X  |\n|     |\n|     |\n+-----+"
 		}
 	]
 }
