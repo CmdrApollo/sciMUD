@@ -95,7 +95,7 @@ class UseCommand(Command):
             if len(self.arguments) > 1:
                 recipient = self.arguments[1]
 
-            return item().use(recipient, player, world)
+            return item.use(recipient, player, world)
         
         return "You don't have that item."
 
@@ -127,8 +127,13 @@ class SearchCommand(Command):
         player_room = world.state.get_room(player.current_room)
 
         if len(player_room.hidden_items):
-            player_room.items += player_room.hidden_items
-            return f"You dig through the room, you found {'some items' if len(player_room.hidden_items) > 1 else 'an item'}!"
+            h = player_room.hidden_items.copy()
+
+            for i in player_room.hidden_items[::-1]:
+                player_room.items.append(i)
+                player_room.hidden_items.remove(i)
+
+            return f"You dig through the room, you found {'some items' if len(h) > 1 else 'an item'}!"
         
         return "You search the room far and wide, but fail to find anything."
 

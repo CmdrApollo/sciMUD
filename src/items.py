@@ -1,3 +1,10 @@
+import json
+# import jsonschema
+from pathlib import Path
+
+#TODO: probably change this to be found inside of project settings file or something, in case of restructuring
+ITEMS_PATH = Path(__file__).parent.parent / "data" / "items"
+
 class Item:
     def __init__(self, name: str, description: str, needs_recipient: bool = False) -> None:
         #TODO: add weight
@@ -18,6 +25,7 @@ class Item:
 
     def use(self, recipient: str, player, world) -> str:
         return ''
+    
 class Weapon(Item):
     def __init__(self, name: str,verb: str, description: str, stats: dict[str,float]):
         super().__init__(name, description, True)
@@ -27,28 +35,41 @@ class Weapon(Item):
     def use(self, recipient: str, player, world) -> str:
         if self.try_use(recipient, player, world):
             if recipient in world.state.get_room(player.current_room).entities:
+                # TODO instead of just removing, make it so
+                # that there is health and proper combat
+                
                 world.state.get_room(player.current_room).entities.remove(recipient)
                 world.send_message_to_players_in_room(player, f"Player '{player.name}' stabs the {recipient}.", player.current_room)
+                
                 return f"You viciously {self.verb} the {recipient}."
             else:
                 return f"There is no {recipient} here."
         return self.fail_message
 
-class Knife(Weapon):
-    def __init__(self):
-        super().__init__("Knife", "poke", "A small knife.", {
-            'strength': 10,
-            'attack': 2,
-        })
+WEAPONS: list[Weapon] = []
+#consumables: list[Consumable] = []
+#wearables: list[Wearable] = []
 
-weapons: list[Weapon] = list()
-#consumables: list[Consumable] = list()
-#wearables: list[Wearable] = list()
+with open(ITEMS_PATH / "weapons.json") as f:
+    data = json.load(f)
+
+weapons_list = data["items"]
+
+for w in weapons_list:
+    WEAPONS.append(Weapon(
+        w['name'],
+        w['verb'],
+        w['description'],
+        w['stats']
+    ))
+
+def get_weapon_with_name(name: str) -> Weapon:
+    for w in WEAPONS:
+        if w.name.lower() == name.lower():
+            return w
+    
+    return None
 
 def get_item_with_name(name: str) -> Item:
-    match name:
-        case "knife":
-            return Knife
-        case _:
-            return None
-        
+    # TODO all three types
+    return get_weapon_with_name(name)

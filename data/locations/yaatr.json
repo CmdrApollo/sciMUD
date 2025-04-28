@@ -56,15 +56,13 @@
 			"name": "guild_hall_yaatr",
 			"description": "Within the Guilds Hall, you feel an inviting aura that welcomes you into the building. The lighting, though dim, feels of home and reminds of a sweet ale upon the tongue, or a lover's embrace. You feel welcomed here. To the west you see Ya'atr's main road.",
 			"items": [],
-			"hidden_items": [
-				"knife"
-			],
+			"hidden_items": [],
 			"entities": [],
 			"north": null,
 			"south": null,
-			"east": null,
+			"east": "guild_hall_barracks_yaatr",
 			"west": "main_road2_yaatr",
-			"drawing": "+-----+\n|     |\n|     |\n|\u001b[33mr\u001b[0m\u001b[97m-\u001b[0mX  |\n|     |\n|     |\n+-----+"
+			"drawing": "+-----+\n|     |\n|     |\n|\u001b[33mr\u001b[0m\u001b[97m-\u001b[0mX\u001b[97m-\u001b[0m\u001b[32mr\u001b[0m|\n|     |\n|     |\n+-----+"
 		},
 		{
 			"name": "main_road_3_yaatr",
@@ -101,6 +99,22 @@
 			"east": "dungeon_entrance_yaatr",
 			"west": null,
 			"drawing": "+-----+\n|  \u001b[33mr\u001b[0m  |\n|  \u001b[97m|\u001b[0m  |\n|  X\u001b[97m-\u001b[0m$|\n|     |\n|     |\n+-----+"
+		},
+		{
+			"name": "guild_hall_barracks_yaatr",
+			"description": "You walk into the barracks. They have a musty smell about them, as if those who reside here haven't bathed in aeons. Despite the stench, however, it seems rather homely. Each bed has a small bedside table, typically adorned with personal items and small trinkets. It feels quaint. To the west you see the Guild Hall's main room.",
+			"items": [],
+			"hidden_items": [
+				"knife",
+				"cloak",
+				"hat"
+			],
+			"entities": [],
+			"north": null,
+			"south": null,
+			"east": null,
+			"west": "guild_hall_yaatr",
+			"drawing": "+-----+\n|     |\n|     |\n|\u001b[32mr\u001b[0m\u001b[97m-\u001b[0mX  |\n|     |\n|     |\n+-----+"
 		}
 	]
 }

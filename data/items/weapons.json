@@ -1,0 +1,15 @@
+{
+    "items": [
+        {
+            "type": "weapon",
+            "name": "Knife",
+            "verb": "stab",
+            "description": "A rusty old knife that has seen better days. You wonder if it can even cut a blade of grass.",
+            "stats": {
+                "strength": 0,
+                "atk": 1,
+                "spd": 1
+            }
+        }
+    ]
+}
