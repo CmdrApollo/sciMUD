@@ -1,1 +1,12 @@
+Persistent world state through database
+Command Parser - more robust?
+Item and item interactions
+    Player() -> Command() -> 
+Core Gameplay
+    Combat system
+        Timer implementation
+        Content creation system
+    Dungeon system
+        Procedural generation (?)
+    NPC system
 moon command

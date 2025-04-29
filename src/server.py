@@ -9,13 +9,13 @@ from world import World
 from player import Player
 import config
 
-selector = selectors.DefaultSelector()
+selector: selectors.DefaultSelector = selectors.DefaultSelector()
 
-world = World()
+world: World = World()
 
-MAX_BYTES = 1024
+MAX_BYTES: int = 1024
 
-def accept_wrapper(sock):
+def accept_wrapper(sock: socket.socket) -> None:
     conn, addr = sock.accept()
     
     print(f"Accepted connection from {addr}")

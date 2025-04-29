@@ -13,7 +13,7 @@ FONT = pygame.font.SysFont("courier", 20)
 WIDTH, HEIGHT = 800, 600
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
-if os.path.exists(os.path.join('data', 'locations', 'yaatr_dungeon.json')):
+if os.path.exists(os.path.join('data', 'locations', 'yaatr.json')):
     rooms = [
         Room(None, r['name'], r['description'], r['items'], r['hidden_items'], r['entities'], {
             'north': r['north'],
@@ -21,7 +21,7 @@ if os.path.exists(os.path.join('data', 'locations', 'yaatr_dungeon.json')):
             'east': r['east'],
             'west': r['west']
         }, r['drawing'])
-        for r in json.load(open(os.path.join('data', 'locations', 'yaatr_dungeon.json')))["rooms"]
+        for r in json.load(open(os.path.join('data', 'locations', 'yaatr.json')))["rooms"]
     ]
 else:
     rooms = []
@@ -106,7 +106,7 @@ def main():
                                 "drawing": generate_drawing(r)
                             })
                         
-                        json.dump(data, open(os.path.join('data', 'locations', 'yaatr_dungeon.json'), 'w'), indent='\t')
+                        json.dump(data, open(os.path.join('data', 'locations', 'yaatr.json'), 'w'), indent='\t')
 
                     if event.key == pygame.K_UP and not current_room.neighbors['north']:
                         rooms.append(Room(None, askstring("room name", "room name"), askstring("room description", "room description"), [], [], [], {

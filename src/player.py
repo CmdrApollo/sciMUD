@@ -5,7 +5,7 @@ nothing_message = colored("You do nothing.", yellow)
 forbidden_words = ['to', 'on', 'a', 'an', 'the', 'for', 'towards', 'at', 'with']
 
 class Player:
-    def __init__(self, world):
+    def __init__(self, world) -> None:
         self.potential_name = ""
         self.name = ""
 
@@ -28,7 +28,7 @@ class Player:
 
         self.message_from_world = ""
 
-    def prompt(self):
+    def prompt(self) -> str:
         if self.just_started:
             self.just_started = False
 
@@ -39,7 +39,7 @@ class Player:
             colored("&8888888888888h.  .h        h     ", gray) + colored("j&*  h8    88   88  h8     88            88   \n", white),
             colored(" *8888888888888h jh8       8h          ", gray) + colored("j8    &h   &j  h8     88      j888h.88   \n", white),
             colored("              .hj*h!      j &.         ", gray) + colored("h8    h8  *8   h8     88    j=     888   \n", white),
-            colored(".j8888888888888*  *88888=h  *88888h.   ", gray) + colored("h8    h8  88  j**;   j88   j*8    j888  j\n", white),
+            colored(".j8888888888888&  *88888=h  *88888h.   ", gray) + colored("h8    h8  88  j**;   j88   j*8    j888  j\n", white),
             colored("!8888888888888*    *88888*   *88888*   ", gray) + colored("&;    *&  *&=j*  *;8j**&==j  ;=&8j***&=j*\n", white),
             "\nEnter your character's name:\n"])
         else:

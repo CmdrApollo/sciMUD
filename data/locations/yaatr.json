@@ -86,7 +86,7 @@
 			"south": "main_road5_yaatr",
 			"east": null,
 			"west": null,
-			"drawing": "+-----+\n|  \u001b[33mr\u001b[0m  |\n|  \u001b[97m|\u001b[0m  |\n|  X  |\n|  \u001b[97m|\u001b[0m  |\n|  \u001b[33mr\u001b[0m\u001b[97m-\u001b[0m$|\n+-----+"
+			"drawing": "+-----+\n|  \u001b[33mr\u001b[0m  |\n|  \u001b[97m|\u001b[0m  |\n|  X  |\n|  \u001b[97m|\u001b[0m  |\n|  \u001b[33mr\u001b[0m  |\n+-----+"
 		},
 		{
 			"name": "main_road5_yaatr",
@@ -95,10 +95,10 @@
 			"hidden_items": [],
 			"entities": [],
 			"north": "main_road4_yaatr",
-			"south": null,
+			"south": "main_road6_yaatr",
 			"east": "dungeon_entrance_yaatr",
 			"west": null,
-			"drawing": "+-----+\n|  \u001b[33mr\u001b[0m  |\n|  \u001b[97m|\u001b[0m  |\n|  X\u001b[97m-\u001b[0m$|\n|     |\n|     |\n+-----+"
+			"drawing": "+-----+\n|  \u001b[33mr\u001b[0m  |\n|  \u001b[97m|\u001b[0m  |\n|  X\u001b[97m-\u001b[0m$|\n|  \u001b[97m|\u001b[0m  |\n|  \u001b[33mr\u001b[0m  |\n+-----+"
 		},
 		{
 			"name": "guild_hall_barracks_yaatr",
@@ -115,6 +115,18 @@
 			"east": null,
 			"west": "guild_hall_yaatr",
 			"drawing": "+-----+\n|     |\n|     |\n|\u001b[32mr\u001b[0m\u001b[97m-\u001b[0mX  |\n|     |\n|     |\n+-----+"
+		},
+		{
+			"name": "main_road6_yaatr",
+			"description": "description here.",
+			"items": [],
+			"hidden_items": [],
+			"entities": [],
+			"north": "main_road5_yaatr",
+			"south": null,
+			"east": null,
+			"west": null,
+			"drawing": "+-----+\n|  \u001b[33mr\u001b[0m  |\n|  \u001b[97m|\u001b[0m  |\n|  X  |\n|     |\n|     |\n+-----+"
 		}
 	]
 }

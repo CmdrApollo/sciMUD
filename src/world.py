@@ -50,7 +50,7 @@ class World:
     def send_message_to_players_in_room(self, from_player: Player, message: str, room: str) -> None:
         for _, player in self.players.items():
             if player.current_room == room and player.name and player != from_player:
-                player.message_from_world = message
+                self.send_message_to_player(player, message)
         
     def send_message_to_player(self, to_player: Player, message: str) -> None:
         to_player.message_from_world = message
