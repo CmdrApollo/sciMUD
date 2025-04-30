@@ -1,13 +1,29 @@
+from typing import Any
 from commands import *
 from colors import *
+
+import os
+import json
 
 nothing_message = colored("You do nothing.", yellow)
 forbidden_words = ['to', 'on', 'a', 'an', 'the', 'for', 'towards', 'at', 'with']
 
+def get_player_data(filename: str) -> dict[str, Any]:
+    path = os.path.join('data', 'players', filename + '.json')
+
+    if os.path.exists(path):
+        return json.load(open(path))
+
+    return {}
+
 class Player:
     def __init__(self, world) -> None:
+        self.is_new_player = True
+
         self.potential_name = ""
         self.name = ""
+
+        self.password = ""
 
         self.health = 10
         self.max_health = self.health
@@ -27,6 +43,30 @@ class Player:
         self.current_room = world.state.global_rooms[0].name
 
         self.message_from_world = ""
+
+        self.awaiting_password = True
+
+    def save_to_file(self) -> None:
+        data = {}
+        
+        data["name"] = self.name
+        data["password"] = self.password
+
+        data["health"] = self.health
+        data["max_health"] = self.max_health
+        
+        data["magic"] = self.magic
+        data["max_magic"] = self.max_magic
+        
+        data["temperature"] = self.temperature
+        data["max_temperature"] = self.max_temperature
+
+        data["current_room"] = self.current_room
+        
+        with open(os.path.join('data', 'players', self.name + '.json'), 'w') as f:
+            json.dump(data, f)
+            
+            f.close()
 
     def prompt(self) -> str:
         if self.just_started:
@@ -63,9 +103,27 @@ class Player:
                     case 'y':
                         self.name = self.potential_name
 
-                        self.world.send_message_to_players_in_room(self, f"Player '{self.name}' joins the game.", self.current_room)
+                        data = get_player_data(self.name)
 
-                        return self.world.state.get_room(self.current_room).describe(self)
+                        if data:
+                            self.name = data["name"]
+                            self.password = data["password"]
+
+                            self.health = data["health"]
+                            self.max_health = data["max_health"]
+                            
+                            self.magic = data["magic"]
+                            self.max_magic = data["max_magic"]
+                            
+                            self.temperature = data["temperature"]
+                            self.max_temperature = data["max_temperature"]
+
+                            self.current_room = data["current_room"]
+
+                            self.is_new_player = False
+                            return f"Character with name {self.name} found! Please enter your password:"
+                        else:
+                            return f"Character with name {self.name} not found... Creating a new character. Please choose a password:"
                     case 'n':
                         self.potential_name = ''
                     case _:
@@ -73,6 +131,25 @@ class Player:
                 
                 return "Enter your character's name:\n"
         
+        if self.awaiting_password:
+            if self.is_new_player:
+                self.password = text.strip()
+
+                self.world.send_message_to_players_in_room(self, f"Player '{self.name}' joins the game.", self.current_room)
+
+                self.awaiting_password = False
+
+                return f"Password set. Welcome to sciMUD! Including you, there are currently {len(self.world.players)} players active."
+            else:
+                if text.strip() == self.password:
+                    self.world.send_message_to_players_in_room(self, f"Player '{self.name}' joins the game.", self.current_room)
+
+                    self.awaiting_password = False
+
+                    return f"Password correct. Welcome to sciMUD! Including you, there are currently {len(self.world.players)} players active."
+                else:
+                    return "Incorrect password. Please enter your password."
+                
         stripped_text = text.lower().strip()
 
         for a in aliases:
@@ -85,7 +162,9 @@ class Player:
             self.command = commands[verb]
             if len(args) >= self.command.number_arguments:
                 self.command.arguments = args
-                return self.command.process(self, self.world)
+                r = self.command.process(self, self.world)
+                self.save_to_file()
+                return r
             else:
                 return colored(f"Incorrect number of arguments. Expected (at least) {len(self.command.arguments)}.", red)
         else:
