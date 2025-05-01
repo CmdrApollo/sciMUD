@@ -1,0 +1,1 @@
+goodbye_message = "Goodbye!"

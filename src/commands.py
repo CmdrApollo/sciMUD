@@ -111,7 +111,7 @@ class LookCommand(Command):
         if len(self.arguments) > 0:
             recipient = self.arguments[0]
             item = get_item_with_name(recipient)
-            if item and (type(item) in player.inventory or recipient in player_room.items):
+            if item and (item in player.inventory or recipient in player_room.items):
                 return item.description
             else:
                 return "You don't see that."

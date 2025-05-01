@@ -9,6 +9,8 @@ from world import World
 from player import Player
 import config
 
+from constants import goodbye_message
+
 selector: selectors.DefaultSelector = selectors.DefaultSelector()
 
 world: World = World()
@@ -44,6 +46,11 @@ def service_connection(key, mask) -> None:
                 current_player = world.players[name]
 
                 output = current_player.parse(text)
+
+                if output == goodbye_message:
+                    print(f"Closing connection to {data.addr}.")
+                    selector.unregister(sock)
+                    sock.close()
             else:
                 output = colored("An error occured with the server.", red)
             

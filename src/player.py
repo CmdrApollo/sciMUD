@@ -2,6 +2,8 @@ from typing import Any
 from commands import *
 from colors import *
 
+from constants import goodbye_message
+
 import os
 import json
 
@@ -62,6 +64,8 @@ class Player:
         data["max_temperature"] = self.max_temperature
 
         data["current_room"] = self.current_room
+
+        data["inventory"] = [i.name for i in self.inventory]
         
         with open(os.path.join('data', 'players', self.name + '.json'), 'w') as f:
             json.dump(data, f)
@@ -97,7 +101,7 @@ class Player:
             if self.potential_name == "":
                 self.potential_name = text.lower().strip().capitalize()
             
-                return f"Really name your character '{self.potential_name}'? (y/n)"
+                return f"Is the name '{self.potential_name}' correct? (y/n)"
             else:
                 match text.lower().strip():
                     case 'y':
@@ -119,6 +123,8 @@ class Player:
                             self.max_temperature = data["max_temperature"]
 
                             self.current_room = data["current_room"]
+
+                            self.inventory = [get_item_with_name(name) for name in data["inventory"]]
 
                             self.is_new_player = False
                             return f"Character with name {self.name} found! Please enter your password:"
@@ -151,6 +157,9 @@ class Player:
                     return "Incorrect password. Please enter your password."
                 
         stripped_text = text.lower().strip()
+
+        if stripped_text == "quit":
+            return goodbye_message
 
         for a in aliases:
             stripped_text = stripped_text.replace(a[0], a[1])
