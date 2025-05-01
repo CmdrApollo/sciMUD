@@ -18,6 +18,17 @@ def get_player_data(filename: str) -> dict[str, Any]:
 
     return {}
 
+class EntityStatus:
+    NONE = 1 << 0
+    ONFIRE = 1 << 1
+    FROZEN = 1 << 2
+    UNDERWATER = 1 << 3
+    ASLEEP = 1 << 4
+    INTOXICATED = 1 << 5
+    SHOCKED = 1 << 6
+    BLIND = 1 << 7
+    SICK = 1 << 8
+
 class Player:
     def __init__(self, world) -> None:
         self.is_new_player = True
@@ -47,6 +58,8 @@ class Player:
         self.message_from_world = ""
 
         self.awaiting_password = True
+
+        self.status = EntityStatus.NONE
 
     def save_to_file(self) -> None:
         data = {}

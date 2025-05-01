@@ -10,3 +10,33 @@ Core Gameplay
         Procedural generation (?)
     NPC system
 moon command
+
+enum RunesType1
+{
+    A,
+    B,
+    C
+}
+
+enum RunesType2
+{
+    D,
+    E,
+    F
+}
+
+enum RunesType3
+{
+    G,
+    H,
+    I
+}
+
+store in a file, runes 1 2 and 3 as ints
+
+spell is a class that implements a 'process' method that gets customized by the spell's parameters
+    Class Spell = boilerplate spell. the spell parameters are the runes that compose it; when a spell gets made, 
+    it .copy()'s the base class, then pickle's it into a file or database?
+    Class Spell(runes: list[]):
+        method process:
+            runes -> return action
