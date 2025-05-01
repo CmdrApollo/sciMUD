@@ -28,6 +28,7 @@ class EntityStatus:
     SHOCKED = 1 << 6
     BLIND = 1 << 7
     SICK = 1 << 8
+    WET = 1 << 9
 
 class Player:
     def __init__(self, world) -> None:
