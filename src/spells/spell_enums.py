@@ -73,7 +73,7 @@ intensities = {
     '#': Intensity.INSANE,
 }
 # sets you on fire for a little bit just a lil
-# *@;`-
+# *@.`-
 
 # sets someone else on fire a lot for a medium amount of time
-# *X;3+
+# *X.3+
