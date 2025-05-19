@@ -5,9 +5,22 @@ from pathlib import Path
 #TODO: probably change this to be found inside of project settings file or something, in case of restructuring
 ITEMS_PATH = Path(__file__).parent.parent / "data" / "items"
 
+class ItemStatus:
+    NONE = 1 << 0   # 00000001
+    ONFIRE = 1 << 1 # 00000010
+    FROZEN = 1 << 2 # 00000100
+    UNDERWATER = 1 << 3
+    ELECTRIFIED = 1 << 6
+    WET = 1 << 9
+    
+# status = ItemStatus.WET | ItemStatus.SHOCKED
+# status ^= ItemStatus.SHOCKED
+# status & ItemStatus.SHOCKED  # return boolean
+
 class Item:
     def __init__(self, name: str, description: str, needs_recipient: bool = False) -> None:
         #TODO: add weight
+        self.status = 0
         self.name: str = name
         self.description: str = description
         self.needs_recipient: bool = needs_recipient

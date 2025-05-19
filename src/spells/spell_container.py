@@ -15,13 +15,13 @@ class SpellContainer:
         self._complexity_to_mana = 8
         self._mana_scaling = 1.11
 
-        self.mana_cost = self._calculate_mana_cost
-        self.gold_cost = self._calculate_gold_cost
+        self.mana_cost = self._calculate_mana_cost()
+        self.gold_cost = self._calculate_gold_cost()
 
         # Initialize the spell linked to this container
         self.cast = None #TODO: fix this
         self.Spell = None #TODO: base spell class probably
-        self._init_spell()
+        self._init_spell() #Initialize and assign the spell
         print("{ " + f"Name: {self.name}, Complexity: {self._calculate_complexity()}, Gold Cost: {self._calculate_gold_cost()}, Mana Cost: {self._calculate_mana_cost()}" + " }")
         
     def get_details(self):
@@ -48,15 +48,15 @@ class SpellContainer:
     
     def _init_spell(self) -> None:
         a, r, e1, d1, i1 = self.get_details()
+
         match a:
             case Aspect.EARTH:
                 pass
             case Aspect.WATER:
-                pass
+                self.Spell = ASP.Water
             case Aspect.SHOCK:
                 pass
             case Aspect.FIRE:
-                pass
                 self.Spell = ASP.Fire
             case Aspect.DARK:
                 pass
@@ -64,26 +64,24 @@ class SpellContainer:
                 pass
             case Aspect.MYSTIC:
                 pass
-        self.Spell = ASP.Fire(e1)
-        self.cast = self.Spell.cast
                 
-    # def cast(self, player, targ, world):
-    #     self.Spell.cast()
-        # a, r, e1, d1, i1 = self.get_details()
-        
-        # target = None
+    def cast(self, player, targ, world):
+        self.Spell.cast()
+        a, r, e1, d1, i1 = self.get_details()
+        match r:
+            case Range.SELF:
+                target = player
+            case Range.TARGET:
+                target = targ
+            case Range.ROOM:
+                # SPECIAL
+                pass
+            case Range.WORLD:
+                # ALSO SPECIAL
+                pass  
+        target = None
 
-        # match r:
-        #     case Range.SELF:
-        #         target = player
-        #     case Range.TARGET:
-        #         target = targ
-        #     case Range.ROOM:
-        #         # SPECIAL
-        #         pass
-        #     case Range.WORLD:
-        #         # ALSO SPECIAL
-        #         pass  
+        
                 
 if __name__ == "__main__":
     SpellContainer("Fire-shot", "A low intensity version of the Fireball spell.", "*X.3-") #Fire, Target, First Effect, Medium Duration, High intensity

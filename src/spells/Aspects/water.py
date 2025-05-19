@@ -1,10 +1,8 @@
 from .spell import Spell
 
-class Fire(Spell):
+class Water(Spell):
     # a, r, e1, d1, i1
     def FirstEffect(self): 
-        for e in self.targets:
-            e.st
         print("First Effect")
 
     def SecondEffect(self):

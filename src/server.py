@@ -17,6 +17,8 @@ world: World = World()
 
 MAX_BYTES: int = 1024
 
+TARGET_TPS: int = 1
+
 def accept_wrapper(sock: socket.socket) -> None:
     conn, addr = sock.accept()
     
@@ -95,7 +97,9 @@ sock.listen()
 sock.setblocking(False)
 selector.register(sock, selectors.EVENT_READ, data=None)
 
+import time
 try:
+    tick_time = time.time()
     while True:
         events = selector.select(timeout=None)
         for key, mask in events:
@@ -103,6 +107,10 @@ try:
                 accept_wrapper(key.fileobj)
             else:
                 service_connection(key, mask)
+        if time.time() - tick_time >= 1/TARGET_TPS:
+            world.on_tick()
+            tick_time = time.time()
+
 except KeyboardInterrupt:
     print("Caught keyboard interrupt, shutting down server.")
 finally:

@@ -54,3 +54,8 @@ class World:
         
     def send_message_to_player(self, to_player: Player, message: str) -> None:
         to_player.message_from_world = message
+    
+    def on_tick(self):
+        print("tick tock!")
+        for p in list(self.players.values()):
+            self.send_message_to_player(p, "tick-tock")
