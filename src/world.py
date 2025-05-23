@@ -1,6 +1,7 @@
 from typing import Any
 import os
 import json
+import glob
 
 from rooms import Room
 from player import Player
@@ -13,8 +14,8 @@ class WorldState:
 
         self.global_rooms = []
 
-        for filename in ['yaatr.json', 'yaatr_dungeon.json']:
-            with open(os.path.join("data", "locations", filename)) as f:
+        for filename in glob.glob(os.path.join("data", "locations", "*.json")):
+            with open(filename) as f:
                 data = json.load(f)
 
                 for room in data["rooms"]:
@@ -56,6 +57,4 @@ class World:
         to_player.message_from_world = message
     
     def on_tick(self):
-        print("tick tock!")
-        for p in list(self.players.values()):
-            self.send_message_to_player(p, "tick-tock")
+        pass
